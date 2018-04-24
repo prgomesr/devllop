@@ -1,0 +1,76 @@
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]=isCollapsed>
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown" dropdown>
+        <a href="javascript:void (0)" dropdownToggle class="nav-link dropdown-toggle"><i class="fa fa-suitcase"></i> Financeiro <span class="caret"></span></a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/financeiro/contas-receber">Contas a Receber</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/financeiro/contas-pagar">Contas a Pagar</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/financeiro/caixa-diario">Caixa Diário</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/financeiro/gera-remessa">Gerar Remessa</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/financeiro/cheque">Cheques</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown" dropdown>
+        <a href="javascript:void (0)" dropdownToggle class="nav-link dropdown-toggle">
+          <i class="fa fa-file"></i> Cadastros <span class="caret"></span></a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/instancias/cliente">Cliente</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/instancias/fornecedor">Fornecedor</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/instancias/empresa">Empresa</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a href="javascript:void (0)" dropdownToggle class="nav-link dropdown-toggle"> <i class="fa fa-globe"></i>
+          Outros Cadastros <span class="caret"></span></a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/agencia">Agência</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/banco">Banco</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/categoria-pagamento">Categoria de Pagamento</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/categoria-recebimento">Categoria de Recebimento</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/conta-caixa">Conta Caixa</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/convenio">Convênio</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/grupo">Grupo</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/status-parcela">Status Parcela</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/tipo-recebimento">Tipo de Recebimento</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/operadora">Operadora</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/secretaria">Secretaria</a></li>
+          <li role="menuitem"><a class="dropdown-item" routerLink="/diversos/tipo-socio">Tipo de Sócio</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    <div class="my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown" dropdown>
+          <a href="javascript:void (0)" dropdownToggle class="nav-link dropdown-toggle">João das Neves <span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a class="dropdown-item fa fa-user" href="javascript:void (0)"> Perfil</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item fa fa-power-off" href="javascript:void (0)"> Sair</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="main-container">
+  <main class="container-fluid">
+    <router-outlet></router-outlet>
+  </main>
+</section>
+</body>
