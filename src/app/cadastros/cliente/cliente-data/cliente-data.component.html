@@ -1,0 +1,29 @@
+<app-header-lv2 heading="Cadastro de Cliente" headingAnterior="Clientes" linkAnterior="/cliente"></app-header-lv2>
+
+<div class="ui-g">
+  <form #f="ngForm" autocomplete="off">
+
+    <div class="ui-g-2 ui-fluid">
+    </div>
+
+    <div class="ui-g-1 ui-fluid">
+      <label>Dígito</label>
+    </div>
+
+    <div class="ui-g-3 ui-fluid">
+      <label>Telefone</label>
+    </div>
+
+    <div class="ui-g-3 ui-fluid">
+      <label>Gerente</label>
+    </div>
+
+    <div class="ui-g-3 ui-fluid">
+      <label>Banco*</label>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" [disabled]="f.invalid || f.pristine" label="Salvar"></button>
+    </div>
+  </form>
+</div>

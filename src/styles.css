@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+p-table tr th {
+  text-align: center;
+}
+
+p-table tr td {
+  text-align: center;
+}
+
+.text-table-left {
+  text-align: left;
+}
+
+.badge-warning{
+  color: white;
+}
