@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import {CommonModule, registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -9,6 +10,8 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {LayoutComponent} from './layout/layout.component';
 
+registerLocaleData(localePt);
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +20,9 @@ import {LayoutComponent} from './layout/layout.component';
     CoreRoutingModule
   ],
   declarations: [NavbarComponent, LayoutComponent, LoginComponent],
-  exports: [NavbarComponent]
+  exports: [NavbarComponent],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' }
+  ]
 })
 export class CoreModule { }
