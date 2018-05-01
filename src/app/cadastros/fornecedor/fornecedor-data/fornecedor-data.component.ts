@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 
 import {Fornecedor} from '../../../core/model';
+import {FornecedorService} from '../fornecedor.service';
 
 @Component({
   selector: 'app-fornecedor-data',
@@ -12,9 +13,18 @@ export class FornecedorDataComponent implements OnInit {
 
   step = 0;
   fornecedor = new Fornecedor();
-  constructor(public dialogRef: MatDialogRef<FornecedorDataComponent>) { }
+  constructor(public dialogRef: MatDialogRef<FornecedorDataComponent>,
+              private fornecedorService: FornecedorService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(form) {
+    this.fornecedorService.create(this.fornecedor).subscribe(() => {
+      console.log(form.value);
+      console.log('Fornecedor salvo com sucesso');
+      this.dialogRef.close();
+    });
   }
 
   onNoClick(): void {

@@ -1,0 +1,29 @@
+{
+  "fornecedores": [
+    {
+      "fantasia": "Aresp",
+      "razao": "Associacao",
+      "endereco": {},
+      "id": 1
+    },
+    {
+      "cnpj": "46929667000174",
+      "fantasia": "ARESP",
+      "razao": "Associcao Reg dos Servidores Publicos",
+      "email": "financeiro@arespriopreto.com.br",
+      "contato": "Paulo",
+      "telefonePrincipal": "17 3227-5077",
+      "telefoneSecundario": "17 3216-5530",
+      "isento": true,
+      "endereco": {
+        "cep": "15090020",
+        "logradouro": "Rua Tupi",
+        "numero": "1301",
+        "bairro": "Nova Redentora",
+        "cidade": "SJRP",
+        "uf": "SP"
+      },
+      "id": 2
+    }
+  ]
+}

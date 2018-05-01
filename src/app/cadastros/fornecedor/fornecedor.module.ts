@@ -6,6 +6,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {FornecedorRoutingModule} from './fornecedor-routing.module';
 import {FornecedorComponent} from './fornecedor.component';
 import {FornecedorDataComponent} from './fornecedor-data/fornecedor-data.component';
+import {FornecedorService} from './fornecedor.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {FornecedorDataComponent} from './fornecedor-data/fornecedor-data.compone
     SharedModule,
     FornecedorRoutingModule
   ],
-  declarations: [FornecedorComponent, FornecedorDataComponent]
+  declarations: [FornecedorComponent, FornecedorDataComponent],
+  providers: [FornecedorService]
 })
 export class FornecedorModule { }

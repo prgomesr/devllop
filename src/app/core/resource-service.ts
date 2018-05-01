@@ -2,6 +2,7 @@ import {Resource, Serializer} from './model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {QueryOptions} from './query-options';
+import 'rxjs/add/operator/map';
 
 export class ResourceService<T extends Resource> {
   constructor(private httpClient: HttpClient,
