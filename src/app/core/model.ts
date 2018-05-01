@@ -1,5 +1,4 @@
-export class Cliente {
-  id: number;
+export class Cliente extends Resource {
   nome: string;
   cpf: string;
   telefonePrincipal: string;
@@ -7,8 +6,7 @@ export class Cliente {
   situacao: string;
 }
 
-export class Fornecedor {
-  id: number;
+export class Fornecedor extends Resource {
   razao: string;
   fantasia: string;
   cnpj: string;
@@ -23,8 +21,7 @@ export class Fornecedor {
   endereco = new Endereco();
 }
 
-export class Endereco {
-  id: number;
+export class Endereco extends Resource {
   logradouro: string;
   numero: number;
   complemento: string;
@@ -32,4 +29,14 @@ export class Endereco {
   cidade: string;
   uf: string;
   cep: string;
+}
+
+export class Resource {
+  id: number;
+  parentId?: number;
+}
+
+export interface Serializer {
+  fromJson(json: any): Resource;
+  toJson(resource: Resource): any;
 }
