@@ -1,11 +1,11 @@
 <app-header-lv2 heading="Cadastro de Cliente" headingAnterior="Clientes" linkAnterior="/cliente"></app-header-lv2>
 
 <div class="ui-g">
-  <form #f="ngForm" autocomplete="off">
+  <form #f="ngForm" (ngSubmit)="onsubmit(f)" autocomplete="off">
 
     <div class="ui-g-4 ui-fluid">
       <label>CPF</label>
-      <p-inputMask mask="999.999.999-99" name="cpf"></p-inputMask>
+      <p-inputMask mask="999.999.999-99" name="cpf" required></p-inputMask>
     </div>
 
     <div class="ui-g-3 ui-fluid">
@@ -15,7 +15,10 @@
 
     <div class="ui-g-5 ui-fluid">
       <label>Nome</label>
-      <input type="text" pInputText name="nome">
+      <input type="text" pInputText name="nome" required [ngModel]="cliente.nome" #nome placeholder="Nome">
+      <div style="color: red">
+        Preencha este campo!
+      </div>
     </div>
 
     <div class="ui-g-3 ui-fluid">
@@ -42,7 +45,7 @@
     <div class="ui-g-3 ui-fluid">
       <label>Sexo</label>
       <p-dropdown [options]="sexos" [autoWidth]="false" name="sexo"
-                  placeholder="Selecione:"></p-dropdown>
+                  placeholder="Selecione:" required></p-dropdown>
     </div>
 
     <div class="ui-g-9 ui-fluid">

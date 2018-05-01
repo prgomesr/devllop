@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-      { path: 'cliente', loadChildren: '../cadastros/cliente/cliente.module#ClienteModule' }
+      { path: 'cliente', loadChildren: '../cadastros/cliente/cliente.module#ClienteModule' },
+      { path: 'fornecedor', loadChildren: '../cadastros/fornecedor/fornecedor.module#FornecedorModule' }
     ]
   }
 

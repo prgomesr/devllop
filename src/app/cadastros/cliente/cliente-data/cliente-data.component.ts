@@ -24,9 +24,16 @@ export class ClienteDataComponent implements OnInit {
     today: 'Hoje',
     clear: 'Limpar'
   };
+  cliente: any = {
+    nome: ''
+  }
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onsubmit(form) {
+    console.log(form);
   }
 
 }

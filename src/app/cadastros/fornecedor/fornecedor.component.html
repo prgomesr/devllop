@@ -1,0 +1,64 @@
+<div class="ui-g-12">
+  <div class="example-container">
+    <h5>Fornecedores</h5>
+  </div>
+</div>
+
+<div class="ui-g-12">
+  <div class="example-container">
+    <mat-table #table [dataSource]="fornecedores">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="razao">
+        <mat-header-cell *matHeaderCellDef> Razão Social </mat-header-cell>
+        <mat-cell *matCellDef="let fornecedor"> {{fornecedor.razao}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="fantasia">
+        <mat-header-cell *matHeaderCellDef> Fantasia </mat-header-cell>
+        <mat-cell *matCellDef="let fornecedor"> {{fornecedor.fantasia}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="cnpj">
+        <mat-header-cell *matHeaderCellDef> CNPJ </mat-header-cell>
+        <mat-cell *matCellDef="let fornecedor"> {{fornecedor.cnpj}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="telefonePrincipal">
+        <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+        <mat-cell *matCellDef="let fornecedor"> {{fornecedor.telefonePrincipal}} {{fornecedor.telefoneSecundario}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <a href="javascript:void (0)" matTooltip="Editar" matTooltipPosition="above"><i class="material-icons">mode_edit</i></a>
+          <a href="javascript:void (0)" matTooltip="Excluir" matTooltipPosition="above"><i class="material-icons">delete</i></a>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<div class="ui-g-12">
+  <div class="example-container">
+    <div class="button-row">
+      <button mat-raised-button type="button" (click)="openDialog()">Novo</button>
+    </div>
+  </div>
+</div>
