@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material';
 
 import {Fornecedor} from '../../../core/model';
 import {FornecedorService} from '../fornecedor.service';
+import {ToastyService} from 'ng2-toasty';
 
 @Component({
   selector: 'app-fornecedor-data',
@@ -14,7 +15,8 @@ export class FornecedorDataComponent implements OnInit {
   step = 0;
   fornecedor = new Fornecedor();
   constructor(public dialogRef: MatDialogRef<FornecedorDataComponent>,
-              private fornecedorService: FornecedorService) { }
+              private fornecedorService: FornecedorService,
+              private toasty: ToastyService) { }
 
   ngOnInit() {
   }
@@ -22,7 +24,9 @@ export class FornecedorDataComponent implements OnInit {
   onSubmit(form) {
     this.fornecedorService.create(this.fornecedor).subscribe(() => {
       console.log(form.value);
-      console.log('Fornecedor salvo com sucesso');
+      this.toasty.success({
+        title: 'Sucesso!',
+        msg: 'Fornecedor cadastrado com sucesso.'});
       this.dialogRef.close();
     });
   }

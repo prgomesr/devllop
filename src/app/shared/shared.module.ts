@@ -37,7 +37,7 @@ import {HeaderLv2Component} from './header-lv2/header-lv2.component';
   imports: [
     CommonModule,
     RouterModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   declarations: [HeaderLv1Component, HeaderLv2Component],
   exports: [TableModule, TooltipModule, HeaderLv1Component, HeaderLv2Component, ButtonModule, FormsModule, CommonModule, InputMaskModule,

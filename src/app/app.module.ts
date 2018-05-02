@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {ToastyModule} from 'ng2-toasty';
 
 import {CoreModule} from './core/core.module';
 
@@ -17,7 +18,8 @@ import {CoreModule} from './core/core.module';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastyModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
