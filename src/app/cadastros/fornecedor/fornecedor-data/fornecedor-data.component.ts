@@ -12,7 +12,7 @@ import {ToastyService} from 'ng2-toasty';
 })
 export class FornecedorDataComponent implements OnInit {
 
-  step = 0;
+  index = 0;
   fornecedor = new Fornecedor();
   constructor(public dialogRef: MatDialogRef<FornecedorDataComponent>,
               private fornecedorService: FornecedorService,
@@ -35,16 +35,12 @@ export class FornecedorDataComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  setStep(index: number) {
-    this.step = index;
+  openNext() {
+    this.index = (this.index === 2) ? 0 : this.index + 1;
   }
 
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
+  openPrev() {
+    this.index = (this.index === 0) ? 2 : this.index - 1;
   }
 
   getErrorMessage(campo: any) {

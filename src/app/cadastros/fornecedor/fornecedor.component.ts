@@ -2,47 +2,34 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Fornecedor} from '../../core/model';
 import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {FornecedorDataComponent} from './fornecedor-data/fornecedor-data.component';
-
-
-const ELEMENT_DATA: Fornecedor[] = [
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '17 2121-2121', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-  {id: 1, cnpj: '44.333.333/0001-11', fantasia: 'PADARIA', razao: 'PADARIA ME', email: '', contato: '',
-    observacao: '', telefonePrincipal: '17 3212-1111',
-    telefoneSecundario: '', inscEstadual: '', inscMunicipal: '', isento: true, endereco: null},
-];
+import {FornecedorService} from './fornecedor.service';
 
 @Component({
   selector: 'app-fornecedor',
   templateUrl: './fornecedor.component.html',
   styleUrls: ['./fornecedor.component.css']
 })
-export class FornecedorComponent implements OnInit, AfterViewInit {
+export class FornecedorComponent implements OnInit {
 
-  displayedColumns = ['fantasia', 'razao', 'cnpj', 'telefonePrincipal', 'acoes'];
-  fornecedores = new MatTableDataSource<Fornecedor>(ELEMENT_DATA);
+  fornecedores = [
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'},
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'},
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'},
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'},
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'},
+    {id: 1, razao: 'MERCADO DO ZE LTDA', fantasia: 'MERCADO DO ZE', cnpj: '11.111.111/0001-11', telefonePrincipal: '11 2121-2121'}
+  ];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(private dialog: MatDialog,
+              private fornecedorService: FornecedorService) { }
 
-  constructor(private dialog: MatDialog) { }
+  ngOnInit() {
+    this.getAll();
+  }
 
-  ngOnInit() {}
 
-  ngAfterViewInit() {
-    this.fornecedores.paginator = this.paginator;
+  getAll() {
+    // return this.fornecedorService.list({pageNumber: 1, pageSize: 1}).subscribe(dados => this.fornecedores = dados);
   }
 
   openDialog(): void {

@@ -1,163 +1,184 @@
 <div class="example-container" fxLayout="column">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
-    <mat-accordion class="example-headers-align">
-      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Dados fiscais
-          </mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>account_circle</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+    <p-accordion [activeIndex]="index">
+      <p-accordionTab>
+        <p-header>
+          Dados fiscais
+          <i class="fa fa-user" style="padding-left: 2.5rem"></i>
+        </p-header>
+        <div class="ui-g">
 
-        <div fxLayout="row">
-          <mat-form-field fxFlex="70">
-            <input matInput placeholder="CNPJ" name="cnpj" mask="99.999.999/9999-99"
-            [(ngModel)]="fornecedor.cnpj">
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row">
-          <mat-form-field fxFlex="65">
-            <input matInput placeholder="Razão Social" name="razao" #razao="ngModel"
-                   [(ngModel)]="fornecedor.razao" required>
-            <mat-error *ngIf="razao.invalid">{{getErrorMessage(razao)}}</mat-error>
-          </mat-form-field>
-
-          <mat-form-field fxFlex="35">
-            <input matInput placeholder="Fantasia" name="fantasia" #fantasia="ngModel"
-                   [(ngModel)]="fornecedor.fantasia" required>
-            <mat-error *ngIf="fantasia.invalid">{{getErrorMessage(fantasia)}}</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row">
-          <mat-checkbox #isento name="isento" [(ngModel)]="fornecedor.isento">Isento?</mat-checkbox>
-        </div>
-
-        <mat-form-field>
-          <input matInput placeholder="Inscrição municipal" name="insc_municipal"
-                 [(ngModel)]="fornecedor.inscMunicipal">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Inscrição estadual" name="insc_estadual"
-                 [disabled]="isento.checked" [(ngModel)]="fornecedor.inscEstadual">
-        </mat-form-field>
-
-        <div fxLayout="row">
-          <mat-form-field fxFlex="100">
-            <textarea matInput placeholder="Observação" name="obs"
-                      [(ngModel)]="fornecedor.observacao"></textarea>
-          </mat-form-field>
-        </div>
-
-        <mat-action-row>
-          <button type="button" mat-button color="primary" (click)="nextStep()">Avançar</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Contato
-          </mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>email</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div fxLayout="row">
-          <mat-form-field fxFlex="50">
-            <input matInput placeholder="Telefone principal" name="tel_principal"
-                   [(ngModel)]="fornecedor.telefonePrincipal">
-          </mat-form-field>
-
-          <mat-form-field fxFlex="50">
-            <input matInput placeholder="Telefone secundário" name="tel_secundario"
-                   [(ngModel)]="fornecedor.telefoneSecundario">
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row">
-          <mat-form-field>
-            <input matInput placeholder="Pessoa de contato" name="contato"
-                   [(ngModel)]="fornecedor.contato">
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row">
-          <mat-form-field fxFlex="100">
-            <input type="email" matInput placeholder="E-mail" name="email"
-                   [(ngModel)]="fornecedor.email">
-          </mat-form-field>
-        </div>
-
-        <mat-action-row>
-          <button type="button" mat-button color="warn" (click)="prevStep()">Voltar</button>
-          <button type="button" mat-button color="primary" (click)="nextStep()">Avançar</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Endereço
-          </mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>home</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div ngModelGroup="endereco">
-
-          <div fxLayout="row">
-            <mat-form-field fxFlex="30">
-              <input matInput placeholder="CEP" name="cep" mask="99.999-999" [(ngModel)]="fornecedor.endereco.cep">
-            </mat-form-field>
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="cnpj" type="text" pInputText name="cnpj" mask="99.999.999/9999-99"
+                     [(ngModel)]="fornecedor.cnpj">
+              <label for="cnpj">CNPJ</label>
+            </span>
           </div>
 
-          <div fxLayout="row">
-
-            <mat-form-field fxFlex="60">
-              <input matInput placeholder="Logradouro" name="logradouro" [(ngModel)]="fornecedor.endereco.logradouro">
-            </mat-form-field>
-
-            <mat-form-field fxFlex="15">
-              <input matInput placeholder="Número" name="numero" [(ngModel)]="fornecedor.endereco.numero">
-            </mat-form-field>
-
-            <mat-form-field fxFlex="25">
-              <input matInput placeholder="Complemento" name="complemento" [(ngModel)]="fornecedor.endereco.complemento">
-            </mat-form-field>
-
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="razao" type="text" pInputText name="razao" #razao="ngModel"
+                     [(ngModel)]="fornecedor.razao" required>
+              <label for="razao">Razão Social*</label>
+            </span>
           </div>
 
-          <div fxLayout="row">
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="fantasia" type="text" pInputText name="fantasia" #fantasia="ngModel"
+                     [(ngModel)]="fornecedor.fantasia" required>
+              <label for="fantasia">Fantasia*</label>
+            </span>
+          </div>
 
-            <mat-form-field fxFlex="40">
-              <input matInput placeholder="Bairro" name="bairro" [(ngModel)]="fornecedor.endereco.bairro">
-            </mat-form-field>
+          <div class="ui-g-12 ui-fluid">
+            <p-checkbox name="isento" value="false" label="Isento?" #isento
+                        [(ngModel)]="fornecedor.isento"></p-checkbox>
+          </div>
 
-            <mat-form-field fxFlex="45">
-              <input matInput placeholder="Cidade" name="cidade" [(ngModel)]="fornecedor.endereco.cidade">
-            </mat-form-field>
+          <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="insc_estadual" type="text" pInputText name="insc_estadual"
+                     [disabled]="isento.checked" [(ngModel)]="fornecedor.inscEstadual">
+              <label for="insc_estadual">Inscrição Estadual</label>
+            </span>
+          </div>
+          <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="insc_municipal" type="text" pInputText name="insc_municipal"
+                     [(ngModel)]="fornecedor.inscMunicipal">
+              <label for="insc_municipal">Inscrição Municipal</label>
+            </span>
+          </div>
 
-            <mat-form-field fxFlex="15">
-              <input matInput placeholder="Estado" name="uf" [(ngModel)]="fornecedor.endereco.uf">
-            </mat-form-field>
-
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <textarea id="observacao" rows="3" pInputTextarea name="obs"
+                        [(ngModel)]="fornecedor.observacao"></textarea>
+              <label for="observacao">Observação</label>
+            </span>
           </div>
 
         </div>
 
-        <mat-action-row>
-          <button type="button" mat-button color="warn" (click)="prevStep()">Voltar</button>
-          <button type="submit" mat-button color="primary" (click)="nextStep()">Salvar</button>
-        </mat-action-row>
-      </mat-expansion-panel>
+        <div class="ui-g">
 
-    </mat-accordion>
+          <div class="ui-g-12">
+            <button type="button" pButton label="Avançar" (click)="openNext()" class="ui-button-secondary"></button>
+          </div>
+
+        </div>
+      </p-accordionTab>
+      <p-accordionTab>
+        <p-header>
+          Contato
+          <i class="fa fa-address-book" style="padding-left: 4.8rem"></i>
+        </p-header>
+        <div class="ui-g">
+
+          <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="telefone_principal" type="text" pInputText name="tel_principal"
+                     [(ngModel)]="fornecedor.telefonePrincipal">
+              <label for="telefone_principal">Telefone principal</label>
+            </span>
+          </div>
+
+          <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="telefone_secundario" type="text" pInputText name="tel_secundario"
+                     [(ngModel)]="fornecedor.telefoneSecundario">
+              <label for="telefone_secundario">Telefone secundário</label>
+            </span>
+          </div>
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="contato" type="text" pInputText name="contato"
+                     [(ngModel)]="fornecedor.contato">
+              <label for="contato">Pessoa de contato</label>
+            </span>
+          </div>
+
+          <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="email" type="email" pInputText name="email"
+                     [(ngModel)]="fornecedor.email">
+              <label for="email">E-mail</label>
+            </span>
+          </div>
+
+        </div>
+
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <button type="button" pButton label="Voltar" (click)="openPrev()" class="ui-button-secondary"></button>
+            <button type="button" pButton label="Avançar" (click)="openNext()" class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab>
+        <p-header>
+          Endereço
+          <i class="fa fa-map-marker" style="padding-left: 4.1rem"></i>
+        </p-header>
+        <div class="ui-g" ngModelGroup="endereco">
+
+          <div class="ui-g-4 ui-fluid">
+            <span class="ui-float-label">
+              <input id="cep" type="text" pInputText name="cep" mask="99.999-999" [(ngModel)]="fornecedor.endereco.cep">
+              <label for="cep">CEP</label>
+            </span>
+          </div>
+          <div class="ui-g-8 ui-fluid"></div>
+
+          <div class="ui-g-7 ui-fluid">
+            <span class="ui-float-label">
+              <input id="logradouro" type="text" pInputText name="logradouro" [(ngModel)]="fornecedor.endereco.logradouro">
+              <label for="logradouro">Logradouro</label>
+            </span>
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <span class="ui-float-label">
+              <input id="numero" type="text" pInputText name="numero" [(ngModel)]="fornecedor.endereco.numero">
+              <label for="numero">Número</label>
+            </span>
+          </div>
+          <div class="ui-g-3 ui-fluid">
+            <span class="ui-float-label">
+              <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="fornecedor.endereco.complemento">
+              <label for="complemento">Complemento</label>
+            </span>
+          </div>
+
+          <div class="ui-g-5 ui-fluid">
+            <span class="ui-float-label">
+              <input id="bairro" type="text" pInputText name="bairro" [(ngModel)]="fornecedor.endereco.bairro">
+              <label for="bairro">Bairro</label>
+            </span>
+          </div>
+          <div class="ui-g-5 ui-fluid">
+            <span class="ui-float-label">
+              <input id="cidade" type="text" pInputText name="cidade" [(ngModel)]="fornecedor.endereco.cidade">
+              <label for="cidade">Cidade</label>
+            </span>
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <span class="ui-float-label">
+              <input id="uf" type="text" pInputText name="uf" [(ngModel)]="fornecedor.endereco.uf">
+              <label for="uf">Estado</label>
+            </span>
+          </div>
+
+        </div>
+
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <button type="button" pButton label="Voltar" (click)="openPrev()" class="ui-button-secondary"></button>
+            <button type="submit" pButton label="Salvar"></button>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
   </form>
 </div>
