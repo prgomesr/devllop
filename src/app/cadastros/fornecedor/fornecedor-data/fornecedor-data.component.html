@@ -1,7 +1,8 @@
-<div class="example-container" fxLayout="column">
+<p-dialog [(visible)]="display" [width]="600" [modal]="modal"
+          *ngIf="fornecedor">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
     <p-accordion [activeIndex]="index">
-      <p-accordionTab>
+      <p-accordionTab [selected]="true">
         <p-header>
           Dados fiscais
           <i class="fa fa-user" style="padding-left: 2.5rem"></i>
@@ -126,7 +127,8 @@
 
           <div class="ui-g-4 ui-fluid">
             <span class="ui-float-label">
-              <input id="cep" type="text" pInputText name="cep" mask="99.999-999" [(ngModel)]="fornecedor.endereco.cep">
+              <input id="cep" type="text" pInputText name="cep" mask="99.999-999" [(ngModel)]="fornecedor.endereco.cep"
+                     (blur)="consultaCep($event.target.value, f)">
               <label for="cep">CEP</label>
             </span>
           </div>
@@ -181,4 +183,4 @@
       </p-accordionTab>
     </p-accordion>
   </form>
-</div>
+</p-dialog>

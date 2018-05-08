@@ -18,3 +18,7 @@ p-table tr td {
 .ng-invalid.ng-dirty:not(form) {
   border: 1px solid red;
 }
+
+.modal-devllop {
+  max-width: 600px;
+}

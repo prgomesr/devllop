@@ -10,6 +10,7 @@ import {CoreRoutingModule} from './core-routing.module';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {LayoutComponent} from './layout/layout.component';
+import {ErrorHandlerService} from './error-handler-service';
 
 registerLocaleData(localePt);
 
@@ -24,7 +25,8 @@ registerLocaleData(localePt);
   declarations: [NavbarComponent, LayoutComponent, LoginComponent],
   exports: [NavbarComponent],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+    ErrorHandlerService
   ]
 })
 export class CoreModule { }

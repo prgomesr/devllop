@@ -29,15 +29,18 @@ export class ResourceService<T extends Resource> {
       .map((data: any) => this.serializer.fromJson(data) as T);
   }
 
-  list(queryOptions: QueryOptions): Observable<T[]> {
+  list(): Observable<T[]> {
     return this.httpClient
-      .get(`${this.url}/${this.endpoint}?${queryOptions.toQueryString()}`)
-      .map((data: any) => this.convertData(data.items));
+      .get<any[]>(`${this.url}/${this.endpoint}`);
   }
 
   delete(id: number) {
     return this.httpClient
       .delete(`${this.url}/${this.endpoint}/${id}`);
+  }
+
+  getCep(cep) {
+    return this.httpClient.get<any>(`https://viacep.com.br/ws/${cep}/json`);
   }
 
   private convertData(data: any): T[] {
