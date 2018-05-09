@@ -18,14 +18,14 @@ export class ResourceService<T extends Resource> {
 
   public update(item: T): Observable<T> {
     return this.httpClient
-      .put<T>(`${this.url}/${this.endpoint}/${item.id}`,
+      .put<T>(`${this.url}/${this.endpoint}/${item.ID}`,
         this.serializer.toJson(item))
       .map(data => this.serializer.fromJson(data) as T);
   }
 
   read(id: number): Observable<T> {
     return this.httpClient
-      .get(`${this.url}/${this.endpoint}/${id}`)
+      .get<any>(`${this.url}/${this.endpoint}/id/${id}`)
       .map((data: any) => this.serializer.fromJson(data) as T);
   }
 
@@ -41,6 +41,10 @@ export class ResourceService<T extends Resource> {
 
   getCep(cep) {
     return this.httpClient.get<any>(`https://viacep.com.br/ws/${cep}/json`);
+  }
+
+  getEstadoCivil() {
+    return this.httpClient.get<any[]>('http://192.168.1.115:8000/estadosCivis');
   }
 
   private convertData(data: any): T[] {

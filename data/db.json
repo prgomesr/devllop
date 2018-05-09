@@ -67,6 +67,29 @@
         "cidade": "São José do Rio Preto",
         "uf": "SP"
       }
+    },
+    {
+      "cnpj": "00900900920129",
+      "fantasia": "Fantasia",
+      "razao": "Razao",
+      "email": "jose@mail.com",
+      "contato": "jose",
+      "observacao": "obs blablabla",
+      "telefonePrincipal": "1721212121",
+      "inscMunicipal": "1110101010",
+      "isento": [
+        "false"
+      ],
+      "endereco": {
+        "cep": "15070020",
+        "logradouro": "Rua Aterradinho",
+        "numero": "100",
+        "complemento": "",
+        "bairro": "Vila Cristina",
+        "cidade": "São José do Rio Preto",
+        "uf": "SP"
+      },
+      "id": 4
     }
   ]
 }

@@ -63,6 +63,7 @@ export class FornecedorComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
+        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }
@@ -143,7 +144,7 @@ export class FornecedorComponent implements OnInit {
   }
 
   get editando(): any {
-    return Boolean (this.fornecedor.id);
+    return Boolean (this.fornecedor.ID);
   }
 
 }

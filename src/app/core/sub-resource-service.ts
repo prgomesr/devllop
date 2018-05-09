@@ -20,7 +20,7 @@ export class SubResourceService<T extends Resource> {
 
   public update(item: T): Observable<T> {
     return this.httpClient
-      .put<T>(`${this.url}/${this.parentEndpoint}/${item.parentId}/${this.endpoint}/${item.id}`,
+      .put<T>(`${this.url}/${this.parentEndpoint}/${item.parentId}/${this.endpoint}/${item.ID}`,
         this.serializer.toJson(item))
       .map((data: any) => this.serializer.fromJson(data) as T);
   }
