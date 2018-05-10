@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ClienteService} from './cliente.service';
-import {Cliente} from '../../core/model';
+import {Cliente, EstadoCivil} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormControl} from '@angular/forms';
 import {ToastyService} from 'ng2-toasty';
@@ -14,6 +14,7 @@ import {ErrorHandlerService} from '../../core/error-handler-service';
 export class ClienteComponent implements OnInit {
 
   clientes = [];
+  estados = [];
   cliente = new Cliente();
   index = 0;
   modalRef: BsModalRef;
@@ -32,6 +33,12 @@ export class ClienteComponent implements OnInit {
       error1 => this.errorHandler.handle(error1));
   }
 
+  getEstadosCivis() {
+    this.clienteService.getEstadoCivil().subscribe(dados => this.estados = dados
+        .map(d => ({label: d.descricao, value: d.id})),
+      err => this.errorHandler.handle(err));
+  }
+
   getById(id: number) {
     this.clienteService.read(id).subscribe(dado => this.cliente = dado,
       error1 => this.errorHandler.handle(error1));
@@ -40,13 +47,11 @@ export class ClienteComponent implements OnInit {
   openFormModal(template: TemplateRef<any>, id: number) {
     this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
     this.index = 0;
+    this.getEstadosCivis();
     if (id) {
       this.getById(id);
-      console.log('entrou na edicao' + id);
-      console.log(this.cliente);
     } else {
       this.cliente = new Cliente();
-      console.log('entrou no novo cadastro');
     }
   }
 
@@ -128,7 +133,7 @@ export class ClienteComponent implements OnInit {
   }
 
   get editando(): any {
-    return Boolean (this.cliente.ID);
+    return Boolean (this.cliente.id);
   }
 
   openNext() {

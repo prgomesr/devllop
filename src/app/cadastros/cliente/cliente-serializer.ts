@@ -1,38 +1,41 @@
 import {Cliente} from '../../core/model';
+import * as moment from 'moment';
 
 export class ClienteSerializer {
   fromJson(json: any): Cliente {
     const cliente = new Cliente();
-    cliente.ID = json.ID;
-    cliente.CPF = json.CPF;
-    cliente.EMAIL = json.EMAIL;
-    cliente.NOME = json.NOME;
-    cliente.SITUACAO = json.SITUACAO;
-    cliente.TELEFONE_PRINCIPAL = json.TELEFONE_PRINCIPAL;
-    cliente.TELEFONE_SECUNDARIO = json.TELEFONE_SECUNDARIO;
-    cliente.SEXO = json.SEXO;
-    cliente.NASCIMENTO = json.NASCIMENTO;
-    cliente.RG = json.RG;
-    cliente.ENDERECO_ID = json.ENDERECO_ID;
-    cliente.ESTADO_CIVIL_ID = json.ESTADO_CIVIL_ID
+    cliente.id = json.id;
+    cliente.cpf = json.cpf;
+    cliente.email = json.email;
+    cliente.nome = json.nome;
+    cliente.situacao = json.situacao;
+    cliente.telefone_principal = json.telefone_principal;
+    cliente.telefone_secundario = json.telefone_secundario;
+    cliente.sexo = json.sexo;
+    cliente.nascimento = moment(json.nascimento, 'YYYY-MM-DD').toDate();
+    cliente.rg = json.rg;
+    cliente.observacao = json.observacao;
+    cliente.endereco = json.endereco;
+    cliente.estado_civil = json.estado_civil
 
     return cliente;
   }
 
   toJson(cliente: Cliente): any {
     return {
-      ID: cliente.ID,
-      CPF: cliente.CPF,
-      EMAIL: cliente.EMAIL,
-      NOME: cliente.NOME,
-      SITUACAO: cliente.SITUACAO,
-      TELEFONE_PRINCIPAL: cliente.TELEFONE_PRINCIPAL,
-      TELEFONE_SECUNDARIO: cliente.TELEFONE_SECUNDARIO,
-      SEXO: cliente.SEXO,
-      NASCIMENTO: cliente.NASCIMENTO,
-      RG: cliente.RG,
-      ENDERECO_ID: cliente.ENDERECO_ID,
-      ESTADO_CIVIL_ID: cliente.ESTADO_CIVIL_ID
+      id: cliente.id,
+      cpf: cliente.cpf,
+      email: cliente.email,
+      nome: cliente.nome,
+      situacao: cliente.situacao,
+      telefone_principal: cliente.telefone_principal,
+      telefone_secundario: cliente.telefone_secundario,
+      sexo: cliente.sexo,
+      nascimento: cliente.nascimento,
+      rg: cliente.rg,
+      observacao: cliente.observacao,
+      endereco: cliente.endereco,
+      estado_civil: cliente.estado_civil
     };
   }
 }

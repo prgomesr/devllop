@@ -15,10 +15,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-c>
       <tr>
-        <td class="text-table-left">{{c.NOME}}</td>
-        <td>{{c.CPF}}</td>
-        <td>{{c.TELEFONE_PRINCIPAL}}</td>
-        <td class="text-table-left">{{c.EMAIL}}</td>
+        <td class="text-table-left">{{c.nome}}</td>
+        <td>{{c.cpf}}</td>
+        <td>{{c.telefone_principal}}</td>
+        <td class="text-table-left">{{c.email}}</td>
         <td>
           <span class="badge status-span"
                 [ngClass]="{'badge-success': c.situacao === 'EM DIA', 'badge-danger': c.situacao === 'CANCELADO',
@@ -28,7 +28,7 @@
           <a href="javascript:void(0)" pTooltip="Ativar" tooltipPosition="top"><i class="fa fa-check"
             *ngIf="c.situacao === 'CANCELADO'"></i></a>
           <a href="javascript:void(0)" pTooltip="Editar" tooltipPosition="top"
-             (click)="openFormModal(formModal, c.ID)"><i class="fa fa-pencil"></i></a>
+             (click)="openFormModal(formModal, c.id)"><i class="fa fa-pencil"></i></a>
           <a href="javascript:void(0)" pTooltip="Detalhes" tooltipPosition="top"><i class="fa fa-eye"></i></a>
           <a href="javascript:void(0)" pTooltip="Cancelar" tooltipPosition="top"><i class="fa fa-ban"
             *ngIf="c.situacao === 'EM DIA' || c.situacao === 'INADIMPLENTE'"
@@ -58,7 +58,7 @@
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="cpf" type="text" pInputText name="cpf" mask="999.999.999-99"
-                     [(ngModel)]="cliente.CPF">
+                     [(ngModel)]="cliente.cpf">
               <label for="cpf">CPF</label>
             </span>
             </div>
@@ -66,7 +66,7 @@
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="nome" type="text" pInputText name="nome" #nome="ngModel"
-                     [(ngModel)]="cliente.NOME" required>
+                     [(ngModel)]="cliente.nome" required>
               <label for="nome">Nome*</label>
             </span>
             </div>
@@ -74,7 +74,7 @@
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="rg" type="text" pInputText name="rg" #rg="ngModel"
-                     [(ngModel)]="cliente.RG" required>
+                     [(ngModel)]="cliente.rg" required>
               <label for="rg">RG*</label>
             </span>
             </div>
@@ -82,25 +82,33 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="sexo" type="text" pInputText name="sexo"
-                     [(ngModel)]="cliente.SEXO">
+                     [(ngModel)]="cliente.sexo">
               <label for="sexo">Sexo</label>
             </span>
             </div>
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
-              <input id="nascimento" type="text" pInputText name="nascimento"
-                     [(ngModel)]="cliente.NASCIMENTO">
+              <p-calendar name="nascimento" dateFormat="dd/mm/yy"
+              [(ngModel)]="cliente.nascimento" id="nascimento"></p-calendar>
               <label for="nascimento">Data de nascimento</label>
             </span>
             </div>
 
-            <!--<div class="ui-g-12 ui-fluid">
+            {{f.value | json}}
+
+            <div class="ui-g-6 ui-fluid">
+              <label>Estado Civil</label>
+              <p-dropdown [options]="estados" name="estado_civil" [autoWidth]="false" placeholder="Selecione:"
+                          [(ngModel)]="cliente.estado_civil.id" required></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <textarea id="observacao" rows="3" pInputTextarea name="obs"
-                        [(ngModel)]="fornecedor.observacao"></textarea>
+                        [(ngModel)]="cliente.observacao"></textarea>
               <label for="observacao">Observação</label>
             </span>
-            </div>-->
+            </div>
 
           </div>
 
@@ -122,7 +130,7 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_principal" type="text" pInputText name="tel_principal"
-                     [(ngModel)]="cliente.TELEFONE_PRINCIPAL" ngxPhoneMaskBr>
+                     [(ngModel)]="cliente.telefone_principal" ngxPhoneMaskBr>
               <label for="telefone_principal">Telefone principal</label>
             </span>
             </div>
@@ -130,7 +138,7 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_secundario" type="text" pInputText name="tel_secundario"
-                     [(ngModel)]="cliente.TELEFONE_SECUNDARIO" ngxPhoneMaskBr>
+                     [(ngModel)]="cliente.telefone_secundario" ngxPhoneMaskBr>
               <label for="telefone_secundario">Telefone secundário</label>
             </span>
             </div>
@@ -138,7 +146,7 @@
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="email" type="email" pInputText name="email"
-                     [(ngModel)]="cliente.EMAIL">
+                     [(ngModel)]="cliente.email">
               <label for="email">E-mail</label>
             </span>
             </div>

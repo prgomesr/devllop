@@ -1,5 +1,7 @@
+import {Moment} from 'moment';
+
 export class Resource {
-  ID: number;
+  id: number;
   parentId?: number;
 }
 
@@ -9,17 +11,19 @@ export interface Serializer {
 }
 
 export class Cliente extends Resource {
-  NOME: string;
-  CPF: string;
-  TELEFONE_PRINCIPAL: string;
-  TELEFONE_SECUNDARIO: string;
-  EMAIL: string;
-  SITUACAO: string;
-  RG: string;
-  NASCIMENTO: Date;
-  SEXO: string;
-  ENDERECO_ID = new Endereco();
-  ESTADO_CIVIL_ID = new EstadoCivil();
+  nome: string;
+  cpf: string;
+  telefone_principal: string;
+  telefone_secundario: string;
+  email: string;
+  situacao: string;
+  rg: string;
+  nascimento: Date;
+  sexo: string;
+  descricao: string;
+  observacao: string;
+  endereco = new Endereco();
+  estado_civil = new EstadoCivil();
 }
 
 export class EstadoCivil extends Resource {
@@ -42,38 +46,38 @@ export class Fornecedor extends Resource {
 }
 
 export class Endereco extends Resource {
-  LOGRADOURO: string;
-  NUMERO: number;
-  COMPLEMENTO: string;
-  BAIRRO: string;
-  CIDADE: string;
-  UF: string;
-  CEP: string;
+  logradouro: string;
+  numero: number;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  cep: string;
 }
 
 export class EnderecoSerializer {
   fromJson(json: any): Endereco {
     const endereco = new Endereco();
-    endereco.parentId = json.parentId;
-    endereco.LOGRADOURO = json.LOGRADOURO;
-    endereco.COMPLEMENTO = json.COMPLEMENTO;
-    endereco.BAIRRO = json.BAIRRO;
-    endereco.CIDADE = json.CIDADE;
-    endereco.UF = json.UF;
-    endereco.CEP = json.CEP;
+    endereco.id = json.id;
+    endereco.logradouro = json.logradouro;
+    endereco.complemento = json.complemento;
+    endereco.bairro = json.bairro;
+    endereco.cidade = json.cidade;
+    endereco.uf = json.uf;
+    endereco.cep = json.cep;
 
     return endereco;
   }
 
   toJson(endereco: Endereco): any {
     return {
-      parentId: endereco.parentId,
-      LOGRADOURO: endereco.LOGRADOURO,
-      COMPLEMENTO: endereco.COMPLEMENTO,
-      BAIRRO: endereco.BAIRRO,
-      CIDADE: endereco.CIDADE,
-      UF: endereco.UF,
-      CEP: endereco.CEP
+      id: endereco.id,
+      logradouro: endereco.logradouro,
+      complemento: endereco.complemento,
+      bairro: endereco.bairro,
+      cidade: endereco.cidade,
+      uf: endereco.uf,
+      cep: endereco.cep
     };
   }
 }
@@ -81,7 +85,7 @@ export class EnderecoSerializer {
 export class EstadoCivilSerializer {
   fromJson(json: any): EstadoCivil {
     const estado = new EstadoCivil();
-    estado.parentId = json.parentId;
+    estado.id = json.id;
     estado.descricao = json.descricao;
 
     return estado;
@@ -89,7 +93,7 @@ export class EstadoCivilSerializer {
 
   toJson(estado: EstadoCivil): any {
     return {
-      parentId: estado.parentId,
+      id: estado.id,
       descricao: estado.descricao
     };
   }

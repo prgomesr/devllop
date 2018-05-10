@@ -18,7 +18,7 @@ export class ResourceService<T extends Resource> {
 
   public update(item: T): Observable<T> {
     return this.httpClient
-      .put<T>(`${this.url}/${this.endpoint}/${item.ID}`,
+      .put<T>(`${this.url}/${this.endpoint}/${item.id}`,
         this.serializer.toJson(item))
       .map(data => this.serializer.fromJson(data) as T);
   }
@@ -43,7 +43,7 @@ export class ResourceService<T extends Resource> {
     return this.httpClient.get<any>(`https://viacep.com.br/ws/${cep}/json`);
   }
 
-  getEstadoCivil() {
+  getEstadoCivil(): Observable<T[]> {
     return this.httpClient.get<any[]>('http://192.168.1.115:8000/estadosCivis');
   }
 

@@ -7,6 +7,8 @@ import {ClienteSerializer} from './cliente-serializer';
 @Injectable()
 export class ClienteService extends ResourceService<Cliente> {
 
+  local = 'http://192.168.1.115:8000';
+  heroku = 'https://devllop-api.herokuapp.com';
   constructor(httpClient: HttpClient) {
     super(
       httpClient,

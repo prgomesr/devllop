@@ -144,7 +144,7 @@ export class FornecedorComponent implements OnInit {
   }
 
   get editando(): any {
-    return Boolean (this.fornecedor.ID);
+    return Boolean (this.fornecedor.id);
   }
 
 }

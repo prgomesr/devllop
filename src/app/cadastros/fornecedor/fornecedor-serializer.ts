@@ -3,7 +3,7 @@ import {Fornecedor} from '../../core/model';
 export class FornecedorSerializer {
   fromJson(json: any): Fornecedor {
     const fornecedor = new Fornecedor();
-    fornecedor.ID = json.ID;
+    fornecedor.id = json.id;
     fornecedor.cnpj = json.cnpj;
     fornecedor.fantasia = json.fantasia;
     fornecedor.razao = json.razao;
@@ -22,7 +22,7 @@ export class FornecedorSerializer {
 
   toJson(fornecedor: Fornecedor): any {
     return {
-      ID: fornecedor.ID,
+      ID: fornecedor.id,
       cnpj: fornecedor.cnpj,
       fantasia: fornecedor.fantasia,
       razao: fornecedor.razao,
