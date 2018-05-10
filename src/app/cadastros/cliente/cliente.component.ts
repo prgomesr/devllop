@@ -16,6 +16,10 @@ export class ClienteComponent implements OnInit {
 
   clientes = [];
   estados = [];
+  sexos = [
+    {label: 'Masculino', value: 'M'},
+    {label: 'Feminino', value: 'F'}
+  ];
   cliente = new Cliente();
   index = 0;
   modalRef: BsModalRef;
