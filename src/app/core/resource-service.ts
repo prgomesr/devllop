@@ -43,10 +43,6 @@ export class ResourceService<T extends Resource> {
     return this.httpClient.get<any>(`https://viacep.com.br/ws/${cep}/json`);
   }
 
-  getEstadoCivil(): Observable<T[]> {
-    return this.httpClient.get<any[]>('http://192.168.1.115:8000/estadosCivis');
-  }
-
   private convertData(data: any): T[] {
     return data.map(item => this.serializer.fromJson(item));
   }

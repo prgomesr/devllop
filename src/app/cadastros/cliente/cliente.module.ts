@@ -6,6 +6,7 @@ import {ClienteComponent} from './cliente.component';
 import {ClienteDataComponent} from './cliente-data/cliente-data.component';
 import {ClienteRoutingModule} from './cliente-routing.module';
 import {ClienteService} from './cliente.service';
+import {EstadoCivilService} from './estado-civil.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import {ClienteService} from './cliente.service';
     SharedModule
   ],
   declarations: [ClienteComponent, ClienteDataComponent],
-  providers: [ClienteService]
+  providers: [ClienteService, EstadoCivilService]
 })
 export class ClienteModule { }

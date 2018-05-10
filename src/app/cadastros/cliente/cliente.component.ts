@@ -5,6 +5,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormControl} from '@angular/forms';
 import {ToastyService} from 'ng2-toasty';
 import {ErrorHandlerService} from '../../core/error-handler-service';
+import {EstadoCivilService} from './estado-civil.service';
 
 @Component({
   selector: 'app-cliente',
@@ -20,6 +21,7 @@ export class ClienteComponent implements OnInit {
   modalRef: BsModalRef;
   id: number;
   constructor(private clienteService: ClienteService,
+              private estadoCivilService: EstadoCivilService,
               private modalService: BsModalService,
               private toasty: ToastyService,
               private errorHandler: ErrorHandlerService) { }
@@ -34,7 +36,7 @@ export class ClienteComponent implements OnInit {
   }
 
   getEstadosCivis() {
-    this.clienteService.getEstadoCivil().subscribe(dados => this.estados = dados
+    this.estadoCivilService.getAll().subscribe(dados => this.estados = dados
         .map(d => ({label: d.descricao, value: d.id})),
       err => this.errorHandler.handle(err));
   }

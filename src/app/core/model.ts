@@ -20,7 +20,6 @@ export class Cliente extends Resource {
   rg: string;
   nascimento: Date;
   sexo: string;
-  descricao: string;
   observacao: string;
   endereco = new Endereco();
   estado_civil = new EstadoCivil();
