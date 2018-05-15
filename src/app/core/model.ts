@@ -10,6 +10,14 @@ export interface Serializer {
   toJson(resource: Resource): any;
 }
 
+export class TipoLancamento extends Resource {
+  descricao: string;
+}
+
+export class Categoria extends Resource {
+  descricao: string;
+}
+
 export class Cliente extends Resource {
   nome: string;
   cpf: string;
