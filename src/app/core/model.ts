@@ -52,6 +52,17 @@ export class Fornecedor extends Resource {
   endereco = new Endereco();
 }
 
+export class Empresa extends Resource {
+  cnpj: string;
+  fantasia: string;
+  razao_social: string;
+  insc_estadual: string;
+  insc_municipal: string;
+  isento: boolean;
+  email: string;
+  data_fundacao: Date;
+}
+
 export class Endereco extends Resource {
   logradouro: string;
   numero: number;

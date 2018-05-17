@@ -1,1 +1,156 @@
 <app-header-lv1 heading="Empresas"></app-header-lv1>
+
+
+<div class="ui-g-12">
+  <a href="javascript:void (0)"
+     (click)="openFormModal(formModal)"><i class="fa fa-plus"></i> Novo</a>
+  <p-table [value]="empresas" [paginator]="true" [rows]="10" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-table-left">Razão Social</th>
+        <th style="width: 180px">Fantasia</th>
+        <th style="width: 180px">CNPJ</th>
+        <th>E-mail</th>
+        <th style="width: 80px"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-d>
+      <tr>
+        <td class="text-table-left">{{d.razao_social}}</td>
+        <td>{{d.fantasia}}</td>
+        <td>{{d.cnpj}}</td>
+        <td>{{d.email}}</td>
+        <td>
+          <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
+             (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
+          <a href="javascript:void (0)" pTooltip="Excluir" tooltipPosition="top"
+             (click)="openConfirmModal(confirmModal, d.id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template>
+      <tr>
+        <td colspan="5">
+          Nenhuma empresa encontrada!
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-template #formModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Empresa</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
+      <p-accordion [activeIndex]="index">
+        <p-accordionTab>
+          <p-header>
+            Dados fiscais
+            <i class="fa fa-user" style="padding-left: 2.5rem"></i>
+          </p-header>
+          <div class="ui-g">
+
+            <div class="ui-g-12 ui-fluid">
+              <span class="ui-float-label">
+                <input id="cnpj" type="text" pInputText name="cnpj" mask="99.999.999/9999-99"
+                       [(ngModel)]="empresa.cnpj" required>
+                <label for="cnpj">CNPJ*</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
+              <span class="ui-float-label">
+                <input id="fantasia" type="text" pInputText name="fantasia"
+                       [(ngModel)]="empresa.fantasia">
+                <label for="fantasia">Fantasia</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
+              <span class="ui-float-label">
+                <input id="razao" type="text" pInputText name="razao" #razao="ngModel"
+                       [(ngModel)]="empresa.razao_social" required>
+                <label for="razao">Razão Social*</label>
+              </span>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
+              <p-checkbox name="isento" value="false" label="Isento?" #isento
+                          [(ngModel)]="empresa.isento" required></p-checkbox>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+              <span class="ui-float-label">
+                <input id="insc_estadual" type="text" pInputText name="insc_estadual"
+                       [disabled]="isento.checked" [(ngModel)]="empresa.insc_estadual">
+                <label for="insc_estadual">Inscrição Estadual</label>
+              </span>
+            </div>
+            <div class="ui-g-6 ui-fluid">
+              <span class="ui-float-label">
+                <input id="insc_municipal" type="text" pInputText name="insc_municipal"
+                       [(ngModel)]="empresa.insc_municipal">
+                <label for="insc_municipal">Inscrição Municipal</label>
+              </span>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+              <span class="ui-float-label">
+                <p-calendar name="data_fundacao" dateFormat="dd/mm/yy"
+                            [(ngModel)]="empresa.data_fundacao" id="data_fundacao"></p-calendar>
+                <label for="data_fundacao">Data de fundação</label>
+              </span>
+            </div>
+            <div class="ui-g-6"></div>
+
+          </div>
+
+          <div class="ui-g">
+
+            <div class="ui-g-12">
+              <button type="button" pButton label="Avançar" (click)="openNext()" class="ui-button-secondary"></button>
+            </div>
+
+          </div>
+        </p-accordionTab>
+        <p-accordionTab>
+          <p-header>
+            Contato
+            <i class="fa fa-address-book" style="padding-left: 4.8rem"></i>
+          </p-header>
+          <div class="ui-g">
+
+            <div class="ui-g-12 ui-fluid">
+            <span class="ui-float-label">
+              <input id="email" type="email" pInputText name="email"
+                     [(ngModel)]="empresa.email">
+              <label for="email">E-mail</label>
+            </span>
+            </div>
+
+          </div>
+
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <button type="button" pButton label="Voltar" (click)="openPrev()" class="ui-button-secondary"></button>
+              <button type="submit" pButton label="Salvar"></button>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #confirmModal>
+  <div class="modal-body text-center">
+    <p>Deseja realmente excluir este registro?</p>
+    <button type="button" class="btn btn-danger" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
