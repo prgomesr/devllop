@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
+import {ResourceService} from '../../../core/resource-service';
+import {Banco} from '../../../core/model';
+import {HttpClient} from '@angular/common/http';
+import {BancoSerializer} from './banco-serializer';
 
 @Injectable()
-export class BancoService {
+export class BancoService extends ResourceService<Banco> {
 
-  constructor() { }
+  constructor(http: HttpClient) {
+    super(
+      http,
+      'localhost',
+      'bancos',
+      new BancoSerializer()
+    );
+  }
 
 }

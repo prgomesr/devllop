@@ -4,6 +4,8 @@ import {SharedModule} from '../../../shared/shared.module';
 import {ContaRoutingModule} from './conta-routing.module';
 import {ContaService} from './conta.service';
 import {ContaComponent} from './conta.component';
+import {EmpresaService} from '../../empresa/empresa.service';
+import {AgenciaService} from '../agencia/agencia.service';
 
 @NgModule({
   imports: [
@@ -12,6 +14,6 @@ import {ContaComponent} from './conta.component';
     ContaRoutingModule
   ],
   declarations: [ContaComponent],
-  providers: [ContaService]
+  providers: [ContaService, EmpresaService, AgenciaService]
 })
 export class ContaModule { }

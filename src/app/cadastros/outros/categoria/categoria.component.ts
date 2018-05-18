@@ -19,8 +19,8 @@ export class CategoriaComponent implements OnInit {
   id: number;
   modalRef: BsModalRef;
   categoria = new Categoria();
-  constructor(private modalService: BsModalService,
-              private categoriaService: CategoriaService,
+  constructor(private categoriaService: CategoriaService,
+              private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService) { }
 

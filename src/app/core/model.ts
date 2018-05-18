@@ -63,6 +63,30 @@ export class Empresa extends Resource {
   data_fundacao: Date;
 }
 
+export class Conta extends Resource {
+  descricao: string;
+  numero: string;
+  digito: string;
+  saldo_incial: number;
+  saldo_atual: number;
+  agencia = new Agencia();
+  empresa = new Empresa();
+}
+
+export class Agencia extends Resource {
+  numero: string;
+  digito: string;
+  telefone: string;
+  gerente: string;
+  banco = new Banco();
+}
+
+export class Banco extends Resource {
+  numero: string;
+  nome: string;
+  telefone: string;
+}
+
 export class Endereco extends Resource {
   logradouro: string;
   numero: number;
