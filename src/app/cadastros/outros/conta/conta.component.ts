@@ -38,12 +38,14 @@ export class ContaComponent implements OnInit {
   }
 
   getAllEmpresas() {
-    this.empresaService.list().subscribe(dados => this.empresas = dados,
+    this.empresaService.list().subscribe(dados => this.empresas = dados
+        .map(d => ({value: d.id, label: d.razao_social})),
      error1 => this.errorHandler.handle(error1));
   }
 
   getAllAgencias() {
-    this.agenciaService.list().subscribe(dados => this.agencias = dados,
+    this.agenciaService.list().subscribe(dados => this.agencias = dados
+        .map(d => ({value: d.id, label: d.numero})),
       error1 => this.errorHandler.handle(error1));
   }
 
@@ -53,7 +55,7 @@ export class ContaComponent implements OnInit {
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
     this.getAllEmpresas();
     this.getAllAgencias();
     if (id) {
