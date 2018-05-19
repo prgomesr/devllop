@@ -38,7 +38,7 @@ export class EstadoCivil extends Resource {
 }
 
 export class Fornecedor extends Resource {
-  razao: string;
+  razao_social: string;
   fantasia: string;
   cnpj: string;
   inscEstadual: string;
@@ -92,6 +92,29 @@ export class Convenio extends Resource {
   tx_juros: number;
   tx_multa: number;
   conta = new Conta();
+}
+
+export class Lancamento extends Resource {
+  tipo = 'RECEITA';
+  descricao: string;
+  valor: number;
+  valor_recebido: number;
+  data_vencimento: Date;
+  data_pagamento: Date;
+  data_balanco: Date;
+  observacao: string;
+  conta_fixa: boolean;
+  num_documento: string;
+  num_nf: string;
+  nosso_numero: string;
+  valor_juros: number;
+  valor_multa: number;
+  situacao = 'EM ABERTO'
+  conta = new Conta();
+  categoria = new Categoria();
+  tipo_lancamento = new TipoLancamento();
+  fornecedor = new Fornecedor();
+  cliente = new Cliente();
 }
 
 export class Endereco extends Resource {

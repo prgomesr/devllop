@@ -6,7 +6,7 @@ export class FornecedorSerializer {
     fornecedor.id = json.id;
     fornecedor.cnpj = json.cnpj;
     fornecedor.fantasia = json.fantasia;
-    fornecedor.razao = json.razao;
+    fornecedor.razao_social = json.razao_social;
     fornecedor.email = json.email;
     fornecedor.contato = json.contato;
     fornecedor.observacao = json.observacao;
@@ -25,7 +25,7 @@ export class FornecedorSerializer {
       ID: fornecedor.id,
       cnpj: fornecedor.cnpj,
       fantasia: fornecedor.fantasia,
-      razao: fornecedor.razao,
+      razao_social: fornecedor.razao_social,
       email: fornecedor.email,
       contato: fornecedor.contato,
       observacao: fornecedor.observacao,
