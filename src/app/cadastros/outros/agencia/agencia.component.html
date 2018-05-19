@@ -1,1 +1,104 @@
 <app-header-lv1 heading="Agências"></app-header-lv1>
+
+<div class="ui-g-12">
+  <a href="javascript:void (0)"
+     (click)="openFormModal(formModal)"><i class="fa fa-plus"></i> Novo</a>
+  <p-table [value]="categorias" [responsive]="true" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-table-left" style="width: 120px">Número</th>
+        <th style="width: 50px">Dígito</th>
+        <th style="width: 180px">Telefone</th>
+        <th>Gerente</th>
+        <th>Banco</th>
+        <th style="width: 80px"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-d>
+      <tr>
+        <td class="text-table-left">{{d.numero}}</td>
+        <td>{{d.digito}}</td>
+        <td>{{d.telefone}}</td>
+        <td>{{d.gerente}}</td>
+        <td>{{d.banco.nome}}</td>
+        <td>
+          <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
+             (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
+          <a href="javascript:void (0)" pTooltip="Excluir" tooltipPosition="top"
+             (click)="openConfirmModal(confirmModal, d.id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6" class="text-table-left">
+          Nenhuma agência encontrada.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-template #formModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Agência</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
+      <div class="ui-g-12">
+
+        <div class="ui-g-10 ui-fluid">
+          <span class="ui-float-label">
+            <input type="text" pInputText name="numero" id="numero"
+                   required [(ngModel)]="agencia.numero">
+            <label for="numero">Número*</label>
+          </span>
+        </div>
+        <div class="ui-g-2 ui-fluid">
+          <span class="ui-float-label">
+            <input type="text" pInputText name="digito" id="digito"
+            [(ngModel)]="agencia.digito">
+            <label for="digito">Dígito</label>
+          </span>
+        </div>
+
+        <div class="ui-g-6 ui-fluid">
+          <span class="ui-float-label">
+            <input type="text" pInputText name="telefone" id="telefone" ngxPhoneMaskBr
+            [(ngModel)]="agencia.telefone">
+            <label for="telefone">Telefone</label>
+          </span>
+        </div>
+        <div class="ui-g-6 ui-fluid">
+          <span class="ui-float-label">
+            <input type="text" pInputText name="gerente" id="gerente"
+            [(ngModel)]="agencia.gerente">
+            <label for="gerente">Gerente</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Banco*</label>
+          <p-dropdown name="banco" placeholder="Selecione:" [autoWidth]="false" [options]="bancos"
+                      [(ngModel)]="agencia.banco.id" required></p-dropdown>
+        </div>
+
+        <div class="ui-g-12">
+          <button type="submit" pButton label="Salvar" class="btn-primary"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #confirmModal>
+  <div class="modal-body text-center">
+    <p>Deseja realmente excluir este registro?</p>
+    <button type="button" class="btn btn-danger" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
+

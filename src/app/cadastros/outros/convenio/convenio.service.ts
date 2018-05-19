@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
+import {ResourceService} from '../../../core/resource-service';
+import {Convenio} from '../../../core/model';
+import {HttpClient} from '@angular/common/http';
+import {ConvenioSerializer} from './convenio-serializer';
 
 @Injectable()
-export class ConvenioService {
+export class ConvenioService extends ResourceService<Convenio> {
 
-  constructor() { }
+  constructor(http: HttpClient) {
+    super(
+      http,
+      'host',
+      'convenios',
+      new ConvenioSerializer()
+    );
+  }
 
 }

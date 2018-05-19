@@ -87,6 +87,13 @@ export class Banco extends Resource {
   telefone: string;
 }
 
+export class Convenio extends Resource {
+  numero: string;
+  tx_juros: number;
+  tx_multa: number;
+  conta = new Conta();
+}
+
 export class Endereco extends Resource {
   logradouro: string;
   numero: number;

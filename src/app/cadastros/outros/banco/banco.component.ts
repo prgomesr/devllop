@@ -1,10 +1,10 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Banco} from '../../../core/model';
 import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {BancoService} from './banco.service';
-import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-banco',
@@ -23,6 +23,7 @@ export class BancoComponent implements OnInit {
               private bancoService: BancoService) { }
 
   ngOnInit() {
+    this.getAll();
   }
 
   getAll() {
@@ -54,7 +55,7 @@ export class BancoComponent implements OnInit {
 
   createModel(form: FormControl) {
     this.bancoService.create(this.banco).subscribe(() => {
-        this.toasty.success({title: 'Parabéns!', msg: 'Categoria cadastrada com sucesso.'});
+        this.toasty.success({title: 'Parabéns!', msg: 'Banco cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
         console.log(form.value);
@@ -64,7 +65,7 @@ export class BancoComponent implements OnInit {
 
   updateModel(form: FormControl) {
     this.bancoService.update(this.banco).subscribe(() => {
-        this.toasty.success({title: 'Parabéns!', msg: 'Categoria atualizada com sucesso.'});
+        this.toasty.success({title: 'Parabéns!', msg: 'Banco atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
@@ -73,7 +74,7 @@ export class BancoComponent implements OnInit {
 
   delete(id: number) {
     this.bancoService.delete(id).subscribe(() => {
-        this.toasty.success({title: 'Parabéns!', msg: 'Categoria excluída com sucesso.'});
+        this.toasty.success({title: 'Parabéns!', msg: 'Banco excluído com sucesso.'});
         this.getAll();
       }
       , error1 => this.errorHandler.handle(error1));

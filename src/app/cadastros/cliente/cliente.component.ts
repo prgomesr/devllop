@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ClienteService} from './cliente.service';
-import {Cliente, EstadoCivil} from '../../core/model';
+import {Cliente} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormControl} from '@angular/forms';
 import {ToastyService} from 'ng2-toasty';
