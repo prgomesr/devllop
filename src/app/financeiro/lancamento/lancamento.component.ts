@@ -24,9 +24,12 @@ export class LancamentoComponent implements OnInit {
   tipos = [];
   fornecedores = [];
   clientes = [];
-  id: number;
+  id = 0;
+  index: number;
   modalRef: BsModalRef;
+  modalRef2: BsModalRef;
   lancamento = new Lancamento();
+  options = [];
   constructor(private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
@@ -35,7 +38,12 @@ export class LancamentoComponent implements OnInit {
               private categoriaService: CategoriaService,
               private tipoService: TipoLancamentoService,
               private fornecedorService: FornecedorService,
-              private clienteService: ClienteService) { }
+              private clienteService: ClienteService) {
+    this.options = [
+      {label: 'Receita', value: 'RECEITA', icon: 'fa fa-plus-square'},
+      {label: 'Despesa', value: 'DESPESA', icon: 'fa fa-minus-square'}
+    ];
+  }
 
   ngOnInit() {
     this.getAll();
@@ -83,6 +91,7 @@ export class LancamentoComponent implements OnInit {
 
   openFormModal(template: TemplateRef<any>, id: number) {
     this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
+    this.close();
     this.getAllContas();
     this.getAllCategorias();
     this.getAllTipos();
@@ -90,9 +99,16 @@ export class LancamentoComponent implements OnInit {
     this.getAllClientes();
     if (id) {
       this.getById(id);
-    } else {
-      this.lancamento = new Lancamento();
     }
+  }
+
+  openSelectModal(template: TemplateRef<any>) {
+    this.modalRef2 = this.modalService.show(template, { class: 'modal-sm' });
+    this.lancamento = new Lancamento();
+  }
+
+  close() {
+    this.modalRef2.hide();
   }
 
   onSubmit(form) {
@@ -147,6 +163,14 @@ export class LancamentoComponent implements OnInit {
 
   get editando(): any {
     return Boolean (this.lancamento.id);
+  }
+
+  openNext() {
+    this.index = (this.index === 2) ? 0 : this.index + 1;
+  }
+
+  openPrev() {
+    this.index = (this.index === 0) ? 2 : this.index - 1;
   }
 
 }

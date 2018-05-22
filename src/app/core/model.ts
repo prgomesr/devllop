@@ -103,7 +103,7 @@ export class Lancamento extends Resource {
   data_pagamento: Date;
   data_balanco: Date;
   observacao: string;
-  conta_fixa: boolean;
+  conta_fixa: false;
   num_documento: string;
   num_nf: string;
   nosso_numero: string;

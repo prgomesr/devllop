@@ -15,6 +15,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DialogModule} from 'primeng/dialog';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 import {NgxMaskModule} from 'ngx-mask';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -36,6 +37,6 @@ import {HeaderLv2Component} from './header-lv2/header-lv2.component';
   declarations: [HeaderLv1Component, HeaderLv2Component],
   exports: [TableModule, TooltipModule, HeaderLv1Component, HeaderLv2Component, ButtonModule, FormsModule, CommonModule, InputMaskModule,
   InputTextModule, CalendarModule, DropdownModule, RadioButtonModule, AccordionModule, CheckboxModule, InputTextareaModule, DialogModule,
-    NgxMaskModule, ModalModule, NgxPhoneMaskBrModule, Ng2BRPipesModule, CurrencyMaskModule]
+    NgxMaskModule, ModalModule, NgxPhoneMaskBrModule, Ng2BRPipesModule, CurrencyMaskModule, SelectButtonModule]
 })
 export class SharedModule { }
