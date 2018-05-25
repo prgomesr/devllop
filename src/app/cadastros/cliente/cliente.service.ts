@@ -10,7 +10,7 @@ export class ClienteService extends ResourceService<Cliente> {
   constructor(httpClient: HttpClient) {
     super(
       httpClient,
-      'local',
+      'http://192.168.1.115:7000',
       'clientes',
       new ClienteSerializer()
     );

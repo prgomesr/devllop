@@ -5,8 +5,8 @@ import {EstadoCivil} from '../../core/model';
 
 @Injectable()
 export class EstadoCivilService {
-  url = 'http://192.168.1.115:8000';
-  model = 'estadosCivis';
+  url = 'http://192.168.1.115:7000';
+  model = 'estadoCivil';
   constructor(private http: HttpClient) {
   }
 

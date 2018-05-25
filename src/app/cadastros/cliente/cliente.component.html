@@ -171,52 +171,7 @@
           </p-header>
           <div class="ui-g" ngModelGroup="endereco">
 
-            <div class="ui-g-4 ui-fluid">
-            <span class="ui-float-label">
-              <input id="cep" type="text" pInputText name="cep" mask="99.999-999" [(ngModel)]="cliente.endereco.cep"
-                     (blur)="consultaCep($event.target.value, f)">
-              <label for="cep">CEP</label>
-            </span>
-            </div>
-            <div class="ui-g-8 ui-fluid"></div>
 
-            <div class="ui-g-7 ui-fluid">
-            <span class="ui-float-label">
-              <input id="logradouro" type="text" pInputText name="logradouro" [(ngModel)]="cliente.endereco.logradouro">
-              <label for="logradouro">Logradouro</label>
-            </span>
-            </div>
-            <div class="ui-g-2 ui-fluid">
-            <span class="ui-float-label">
-              <input id="numero" type="text" pInputText name="numero" [(ngModel)]="cliente.endereco.numero">
-              <label for="numero">Número</label>
-            </span>
-            </div>
-            <div class="ui-g-3 ui-fluid">
-            <span class="ui-float-label">
-              <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="cliente.endereco.complemento">
-              <label for="complemento">Complemento</label>
-            </span>
-            </div>
-
-            <div class="ui-g-5 ui-fluid">
-            <span class="ui-float-label">
-              <input id="bairro" type="text" pInputText name="bairro" [(ngModel)]="cliente.endereco.bairro">
-              <label for="bairro">Bairro</label>
-            </span>
-            </div>
-            <div class="ui-g-5 ui-fluid">
-            <span class="ui-float-label">
-              <input id="cidade" type="text" pInputText name="cidade" [(ngModel)]="cliente.endereco.cidade">
-              <label for="cidade">Cidade</label>
-            </span>
-            </div>
-            <div class="ui-g-2 ui-fluid">
-            <span class="ui-float-label">
-              <input id="uf" type="text" pInputText name="uf" [(ngModel)]="cliente.endereco.uf">
-              <label for="uf">Estado</label>
-            </span>
-            </div>
 
           </div>
 
