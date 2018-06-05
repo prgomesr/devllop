@@ -68,7 +68,6 @@ export class AgenciaComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Agência cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }

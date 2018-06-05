@@ -10,7 +10,6 @@ export class TipoLancamentoService extends ResourceService<TipoLancamento> {
   constructor(http: HttpClient) {
     super(
       http,
-      'http://localhost/3000',
       'tiposLancamentos',
       new TipoLancamentoSerializer());
   }

@@ -10,7 +10,6 @@ export class ConvenioService extends ResourceService<Convenio> {
   constructor(http: HttpClient) {
     super(
       http,
-      'host',
       'convenios',
       new ConvenioSerializer()
     );

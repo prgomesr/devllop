@@ -10,7 +10,6 @@ export class AgenciaService extends ResourceService<Agencia> {
   constructor(http: HttpClient) {
     super(
       http,
-      'localhost',
       'agencias',
       new AgenciaSerializer()
     );

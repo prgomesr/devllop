@@ -58,7 +58,6 @@ export class BancoComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Banco cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }

@@ -12,7 +12,6 @@ export class FornecedorService extends ResourceService<Fornecedor> {
 
     super(
       httpClient,
-      'http://localhost:3000',
       'fornecedores',
       new FornecedorSerializer()
     );

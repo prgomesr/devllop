@@ -10,7 +10,6 @@ export class CategoriaService extends ResourceService<Categoria> {
   constructor(http: HttpClient) {
     super(
       http,
-      'localhost',
       'categorias',
       new CategoriaSerializer());
   }

@@ -16,8 +16,8 @@
     <ng-template pTemplate="body" let-c>
       <tr>
         <td class="text-table-left">{{c.nome}}</td>
-        <td>{{c.cpf}}</td>
-        <td>{{c.telefone_principal}}</td>
+        <td>{{c.cpf | cpf}}</td>
+        <td>{{c.telefonePrincipal | telefone}}</td>
         <td class="text-table-left">{{c.email}}</td>
         <td>
           <span class="badge status-span"
@@ -30,7 +30,7 @@
           <a href="javascript:void(0)" pTooltip="Editar" tooltipPosition="top"
              (click)="openFormModal(formModal, c.id)"><i class="fa fa-pencil"></i></a>
           <a href="javascript:void(0)" pTooltip="Detalhes" tooltipPosition="top"><i class="fa fa-eye"></i></a>
-          <a href="javascript:void(0)" pTooltip="Cancelar" tooltipPosition="top"><i class="fa fa-ban"
+          <a href="javascript:void(0)" pTooltip="Inativar" tooltipPosition="top"><i class="fa fa-ban"
             *ngIf="c.situacao === 'EM DIA' || c.situacao === 'INADIMPLENTE'"
               (click)="prepararCancelamento(c.id)"></i></a>
         </td>
@@ -103,7 +103,7 @@
             <div class="ui-g-6 ui-fluid">
               <label>Estado Civil*</label>
               <p-dropdown [options]="estados" name="estado_civil" [autoWidth]="false" placeholder="Selecione:"
-                          [(ngModel)]="cliente.estado_civil.id" required></p-dropdown>
+                          [(ngModel)]="cliente.estadoCivil.id" required></p-dropdown>
             </div>
 
             <div class="ui-g-12 ui-fluid">
@@ -134,7 +134,7 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_principal" type="text" pInputText name="tel_principal"
-                     [(ngModel)]="cliente.telefone_principal" ngxPhoneMaskBr required>
+                     [(ngModel)]="cliente.telefonePrincipal" ngxPhoneMaskBr required>
               <label for="telefone_principal">Telefone principal*</label>
             </span>
             </div>
@@ -142,7 +142,7 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_secundario" type="text" pInputText name="tel_secundario"
-                     [(ngModel)]="cliente.telefone_secundario" ngxPhoneMaskBr>
+                     [(ngModel)]="cliente.telefoneSecundario" ngxPhoneMaskBr>
               <label for="telefone_secundario">Telefone secundário</label>
             </span>
             </div>
@@ -171,7 +171,52 @@
           </p-header>
           <div class="ui-g" ngModelGroup="endereco">
 
+            <div class="ui-g-4 ui-fluid">
+            <span class="ui-float-label">
+              <input id="cep" type="text" pInputText name="cep" mask="99.999-999" [(ngModel)]="cliente.endereco.cep"
+                     (blur)="consultaCep($event.target.value, f)">
+              <label for="cep">CEP</label>
+            </span>
+            </div>
+            <div class="ui-g-8 ui-fluid"></div>
 
+            <div class="ui-g-7 ui-fluid">
+            <span class="ui-float-label">
+              <input id="logradouro" type="text" pInputText name="logradouro" [(ngModel)]="cliente.endereco.logradouro">
+              <label for="logradouro">Logradouro</label>
+            </span>
+            </div>
+            <div class="ui-g-2 ui-fluid">
+            <span class="ui-float-label">
+              <input id="numero" type="text" pInputText name="numero" [(ngModel)]="cliente.endereco.numero">
+              <label for="numero">Número</label>
+            </span>
+            </div>
+            <div class="ui-g-3 ui-fluid">
+            <span class="ui-float-label">
+              <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="cliente.endereco.complemento">
+              <label for="complemento">Complemento</label>
+            </span>
+            </div>
+
+            <div class="ui-g-5 ui-fluid">
+            <span class="ui-float-label">
+              <input id="bairro" type="text" pInputText name="bairro" [(ngModel)]="cliente.endereco.bairro">
+              <label for="bairro">Bairro</label>
+            </span>
+            </div>
+            <div class="ui-g-5 ui-fluid">
+            <span class="ui-float-label">
+              <input id="cidade" type="text" pInputText name="cidade" [(ngModel)]="cliente.endereco.cidade">
+              <label for="cidade">Cidade</label>
+            </span>
+            </div>
+            <div class="ui-g-2 ui-fluid">
+            <span class="ui-float-label">
+              <input id="uf" type="text" pInputText name="uf" [(ngModel)]="cliente.endereco.uf">
+              <label for="uf">Estado</label>
+            </span>
+            </div>
 
           </div>
 

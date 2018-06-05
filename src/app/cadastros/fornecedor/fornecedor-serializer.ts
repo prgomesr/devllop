@@ -6,7 +6,7 @@ export class FornecedorSerializer {
     fornecedor.id = json.id;
     fornecedor.cnpj = json.cnpj;
     fornecedor.fantasia = json.fantasia;
-    fornecedor.razao_social = json.razao_social;
+    fornecedor.razaoSocial = json.razaoSocial;
     fornecedor.email = json.email;
     fornecedor.contato = json.contato;
     fornecedor.observacao = json.observacao;
@@ -22,10 +22,10 @@ export class FornecedorSerializer {
 
   toJson(fornecedor: Fornecedor): any {
     return {
-      ID: fornecedor.id,
+      id: fornecedor.id,
       cnpj: fornecedor.cnpj,
       fantasia: fornecedor.fantasia,
-      razao_social: fornecedor.razao_social,
+      razaoSocial: fornecedor.razaoSocial,
       email: fornecedor.email,
       contato: fornecedor.contato,
       observacao: fornecedor.observacao,

@@ -7,8 +7,9 @@ export class ContaSerializer {
     conta.descricao = json.descricao;
     conta.numero = json.numero;
     conta.digito = json.digito;
-    conta.saldo_incial = json.saldo_incial;
-    conta.saldo_atual = json.saldo_atual;
+    conta.saldoInicial = json.saldoInicial;
+    conta.saldoAtual = json.saldoAtual;
+    conta.caixinha = json.caixinha;
     conta.agencia = json.agencia;
     conta.empresa = json.empresa;
 
@@ -21,8 +22,9 @@ export class ContaSerializer {
       descricao: conta.descricao,
       numero: conta.numero,
       digito: conta.digito,
-      saldo_incial: conta.saldo_incial,
-      saldo_atual: conta.saldo_atual,
+      saldoInicial: conta.saldoInicial,
+      saldoAtual: conta.saldoAtual,
+      caixinha: conta.caixinha,
       agencia: conta.agencia,
       empresa: conta.empresa
     };

@@ -60,7 +60,6 @@ export class CategoriaComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Categoria cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }

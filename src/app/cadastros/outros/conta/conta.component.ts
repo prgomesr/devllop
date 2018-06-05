@@ -3,7 +3,7 @@ import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {ContaService} from './conta.service';
-import {Conta} from '../../../core/model';
+import {Agencia, Conta} from '../../../core/model';
 import {FormControl} from '@angular/forms';
 import {EmpresaService} from '../../empresa/empresa.service';
 import {AgenciaService} from '../agencia/agencia.service';
@@ -39,7 +39,7 @@ export class ContaComponent implements OnInit {
 
   getAllEmpresas() {
     this.empresaService.list().subscribe(dados => this.empresas = dados
-        .map(d => ({value: d.id, label: d.razao_social})),
+        .map(d => ({value: d.id, label: d.razaoSocial})),
      error1 => this.errorHandler.handle(error1));
   }
 
@@ -78,7 +78,6 @@ export class ContaComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Conta cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }

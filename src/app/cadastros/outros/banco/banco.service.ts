@@ -10,7 +10,6 @@ export class BancoService extends ResourceService<Banco> {
   constructor(http: HttpClient) {
     super(
       http,
-      'http://localhost:8080',
       'bancos',
       new BancoSerializer()
     );

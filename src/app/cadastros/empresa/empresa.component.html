@@ -8,7 +8,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th class="text-table-left">Razão Social</th>
-        <th style="width: 180px">Fantasia</th>
+        <th style="width: 230px">Fantasia</th>
         <th style="width: 180px">CNPJ</th>
         <th>E-mail</th>
         <th style="width: 80px"></th>
@@ -16,7 +16,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-d>
       <tr>
-        <td class="text-table-left">{{d.razao_social}}</td>
+        <td class="text-table-left">{{d.razaoSocial}}</td>
         <td>{{d.fantasia}}</td>
         <td>{{d.cnpj}}</td>
         <td>{{d.email}}</td>
@@ -74,27 +74,27 @@
             <div class="ui-g-12 ui-fluid">
               <span class="ui-float-label">
                 <input id="razao" type="text" pInputText name="razao" #razao="ngModel"
-                       [(ngModel)]="empresa.razao_social" required>
+                       [(ngModel)]="empresa.razaoSocial" required>
                 <label for="razao">Razão Social*</label>
               </span>
             </div>
 
             <div class="ui-g-12 ui-fluid">
-              <p-checkbox name="isento" value="false" label="Isento?" #isento
+              <p-checkbox name="isento" binary="true" label="Isento?" #isento
                           [(ngModel)]="empresa.isento" required></p-checkbox>
             </div>
 
             <div class="ui-g-6 ui-fluid">
               <span class="ui-float-label">
                 <input id="insc_estadual" type="text" pInputText name="insc_estadual"
-                       [disabled]="isento.checked" [(ngModel)]="empresa.insc_estadual">
+                       [disabled]="isento.checked" [(ngModel)]="empresa.inscEstadual">
                 <label for="insc_estadual">Inscrição Estadual</label>
               </span>
             </div>
             <div class="ui-g-6 ui-fluid">
               <span class="ui-float-label">
                 <input id="insc_municipal" type="text" pInputText name="insc_municipal"
-                       [(ngModel)]="empresa.insc_municipal">
+                       [(ngModel)]="empresa.inscMunicipal">
                 <label for="insc_municipal">Inscrição Municipal</label>
               </span>
             </div>
@@ -102,7 +102,7 @@
             <div class="ui-g-6 ui-fluid">
               <span class="ui-float-label">
                 <p-calendar name="data_fundacao" dateFormat="dd/mm/yy"
-                            [(ngModel)]="empresa.data_fundacao" id="data_fundacao"></p-calendar>
+                            [(ngModel)]="empresa.dataFundacao" id="data_fundacao"></p-calendar>
                 <label for="data_fundacao">Data de fundação</label>
               </span>
             </div>

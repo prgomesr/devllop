@@ -1,5 +1,3 @@
-import {Moment} from 'moment';
-
 export class Resource {
   id: number;
   parentId?: number;
@@ -21,16 +19,17 @@ export class Categoria extends Resource {
 export class Cliente extends Resource {
   nome: string;
   cpf: string;
-  telefone_principal: string;
-  telefone_secundario: string;
+  telefonePrincipal: string;
+  telefoneSecundario: string;
   email: string;
-  situacao: string;
+  situacao = 'EM DIA';
   rg: string;
   nascimento: Date;
   sexo: string;
   observacao: string;
+  ativo = true;
   endereco = new Endereco();
-  estado_civil = new EstadoCivil();
+  estadoCivil = new EstadoCivil();
 }
 
 export class EstadoCivil extends Resource {
@@ -38,12 +37,12 @@ export class EstadoCivil extends Resource {
 }
 
 export class Fornecedor extends Resource {
-  razao_social: string;
+  razaoSocial: string;
   fantasia: string;
   cnpj: string;
   inscEstadual: string;
   inscMunicipal: string;
-  isento: boolean;
+  isento = false;
   telefonePrincipal: string;
   telefoneSecundario: string;
   contato: string;
@@ -55,20 +54,21 @@ export class Fornecedor extends Resource {
 export class Empresa extends Resource {
   cnpj: string;
   fantasia: string;
-  razao_social: string;
-  insc_estadual: string;
-  insc_municipal: string;
-  isento: boolean;
+  razaoSocial: string;
+  inscEstadual: string;
+  inscMunicipal: string;
+  isento = false;
   email: string;
-  data_fundacao: Date;
+  dataFundacao: Date;
 }
 
 export class Conta extends Resource {
   descricao: string;
   numero: string;
   digito: string;
-  saldo_incial: number;
-  saldo_atual: number;
+  saldoInicial: number;
+  saldoAtual: number;
+  caixinha = false;
   agencia = new Agencia();
   empresa = new Empresa();
 }
@@ -89,8 +89,8 @@ export class Banco extends Resource {
 
 export class Convenio extends Resource {
   numero: string;
-  tx_juros: number;
-  tx_multa: number;
+  txJuros: number;
+  txMulta: number;
   conta = new Conta();
 }
 
@@ -98,21 +98,21 @@ export class Lancamento extends Resource {
   tipo = 'RECEITA';
   descricao: string;
   valor: number;
-  valor_recebido: number;
-  data_vencimento: Date;
-  data_pagamento: Date;
-  data_balanco: Date;
+  valorRecebido: number;
+  dataVencimento: Date;
+  dataPagamento: Date;
+  dataBalanco: Date;
   observacao: string;
-  conta_fixa: false;
-  num_documento: string;
-  num_nf: string;
-  nosso_numero: string;
-  valor_juros: number;
-  valor_multa: number;
+  contaFixa = false;
+  numDocumento: string;
+  numNf: string;
+  nossoNumero: string;
+  valorJuros: number;
+  valorMulta: number;
   situacao = 'EM ABERTO'
   conta = new Conta();
   categoria = new Categoria();
-  tipo_lancamento = new TipoLancamento();
+  tipoLancamento = new TipoLancamento();
   fornecedor = new Fornecedor();
   cliente = new Cliente();
 }

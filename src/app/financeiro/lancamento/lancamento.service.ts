@@ -10,7 +10,6 @@ export class LancamentoService extends ResourceService<Lancamento> {
   constructor(http: HttpClient) {
     super(
       http,
-      'host',
       'lancamentos',
       new LancamentoSerializer()
     );

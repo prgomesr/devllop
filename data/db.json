@@ -1,95 +1,191 @@
 {
   "fornecedores": [
     {
-      "cnpj": "80690309000190",
-      "fantasia": "Correios",
-      "razao": "Correios do Brasil S/A",
-      "email": "jose_h@correios.br",
-      "contato": "José Hernandes",
-      "observacao": "Serviço de entrega",
-      "telefonePrincipal": "1140040000",
-      "telefoneSecundario": "11999999999",
-      "inscMunicipal": "212121",
-      "isento": [
-        "false"
-      ],
-      "endereco": {
-        "cep": "15025030",
-        "logradouro": "Rua Expedicionários",
-        "numero": "100",
-        "complemento": "",
-        "bairro": "Vila Zilda",
-        "cidade": "São José do Rio Preto",
-        "uf": "SP"
+      "cnpj": "02309390290309",
+      "fantasia": "Padaria ME",
+      "razaoSocial": "Padaria",
+      "telefonePrincipal": "1788328382",
+      "isento": false,
+      "endereco": {},
+      "id": 1
+    }
+  ],
+  "lancamentos": [
+    {
+      "tipo": "DESPESA",
+      "descricao": "Compra de pão",
+      "valor": 12.13,
+      "dataVencimento": "2018-06-04T03:00:00.000Z",
+      "contaFixa": false,
+      "situacao": "EM ABERTO",
+      "conta": {
+        "caixinha": false,
+        "agencia": {
+          "banco": {}
+        },
+        "empresa": {
+          "isento": false
+        },
+        "id": 2
+      },
+      "categoria": {
+        "id": 3
+      },
+      "tipoLancamento": {},
+      "fornecedor": {
+        "isento": false,
+        "razaoSocial": "Padaria Me",
+        "endereco": {},
+        "id": 1
+      },
+      "cliente": {
+        "situacao": "EM DIA",
+        "ativo": true,
+        "endereco": {},
+        "estadoCivil": {}
       },
       "id": 1
     },
     {
-      "cnpj": "00753734000141",
-      "fantasia": "Honda",
-      "razao": "Honda Fabrica de Carros ",
-      "email": "marcio.gerencia@hondafilial15.com.br",
-      "contato": "Márcio Caldeira",
-      "observacao": "Fábrica da Honda local.",
-      "telefonePrincipal": "1732112300",
-      "telefoneSecundario": "17991151010",
-      "inscEstadual": "10099778-6",
-      "inscMunicipal": "10101577",
-      "endereco": {
-        "cep": "15060040",
-        "logradouro": "Avenida Philadelpho Manoel Gouveia Netto",
-        "numero": "766",
-        "complemento": "de 2700/2701 ao fim",
-        "bairro": "Vila Maceno",
-        "cidade": "São José do Rio Preto",
-        "uf": "SP"
+      "tipo": "RECEITA",
+      "descricao": "Venda de material",
+      "valor": 100,
+      "dataVencimento": "2018-06-04T03:00:00.000Z",
+      "contaFixa": false,
+      "situacao": "EM ABERTO",
+      "conta": {
+        "caixinha": false,
+        "agencia": {
+          "banco": {}
+        },
+        "empresa": {
+          "isento": false
+        },
+        "id": 1
+      },
+      "categoria": {
+        "id": 3
+      },
+      "tipoLancamento": {},
+      "fornecedor": {
+        "isento": false,
+        "endereco": {}
+      },
+      "cliente": {
+        "situacao": "EM DIA",
+        "ativo": true,
+        "nome": "José Pedro",
+        "endereco": {},
+        "estadoCivil": {},
+        "id": 1
+      },
+      "id": 2
+    }
+  ],
+  "estadosCivis": [
+    {
+      "descricao": "Solteiro",
+      "id": 1
+    }
+  ],
+  "contas": [
+    {
+      "id": 1,
+      "descricao": "Caixa interno",
+      "saldoInicial": 60,
+      "caixinha": false,
+      "agencia": {
+        "banco": {},
+        "id": 1
+      },
+      "empresa": {
+        "isento": false,
+        "id": 1
+      }
+    },
+    {
+      "descricao": "C/C",
+      "numero": "001",
+      "digito": "1",
+      "saldoInicial": 23009.32,
+      "caixinha": false,
+      "agencia": {
+        "banco": {},
+        "id": 1
+      },
+      "empresa": {
+        "isento": false,
+        "id": 1
       },
       "id": 2
     },
     {
-      "id": 3,
-      "cnpj": "15220831000146",
-      "fantasia": "Rio Jardim",
-      "razao": "C R Silva Jardim ME",
-      "email": "riojardim@gmail.com",
-      "contato": "Alex/Carla",
-      "observacao": "Material de construção com ótimo preço na cidade",
-      "telefonePrincipal": "1732270701",
-      "telefoneSecundario": "17981007215",
-      "inscEstadual": "7890000923",
-      "inscMunicipal": "78783230",
-      "endereco": {
-        "cep": "15081000",
-        "logradouro": "Avenida Potirendaba",
-        "numero": "3865",
-        "complemento": "",
-        "bairro": "Residencial Cidade Jardim",
-        "cidade": "São José do Rio Preto",
-        "uf": "SP"
-      }
+      "descricao": "teste",
+      "caixinha": false,
+      "agencia": {
+        "banco": {}
+      },
+      "empresa": {
+        "isento": false,
+        "id": 1
+      },
+      "id": 3
+    }
+  ],
+  "categorias": [
+    {
+      "descricao": "Obras",
+      "id": 1
     },
     {
-      "cnpj": "00900900920129",
-      "fantasia": "Fantasia",
-      "razao": "Razao",
-      "email": "jose@mail.com",
-      "contato": "jose",
-      "observacao": "obs blablabla",
-      "telefonePrincipal": "1721212121",
-      "inscMunicipal": "1110101010",
-      "isento": [
-        "false"
-      ],
-      "endereco": {
-        "cep": "15070020",
-        "logradouro": "Rua Aterradinho",
-        "numero": "100",
-        "complemento": "",
-        "bairro": "Vila Cristina",
-        "cidade": "São José do Rio Preto",
-        "uf": "SP"
+      "descricao": "Material de escritorio",
+      "id": 2
+    },
+    {
+      "descricao": "Outros",
+      "id": 3
+    }
+  ],
+  "tiposLancamentos": [],
+  "clientes": [
+    {
+      "cpf": "29129398298",
+      "nome": "José Pedro",
+      "situacao": "EM DIA",
+      "telefonePrincipal": "98938929389",
+      "sexo": "M",
+      "ativo": true,
+      "endereco": {},
+      "estadoCivil": {
+        "id": 1
       },
-      "id": 4
+      "id": 1
+    }
+  ],
+  "agencias": [
+    {
+      "numero": "6575",
+      "digito": "7",
+      "banco": {
+        "id": 1
+      },
+      "id": 1
+    }
+  ],
+  "empresas": [
+    {
+      "cnpj": "02093920093902",
+      "fantasia": "Correios",
+      "razaoSocial": "Correios SA",
+      "isento": false,
+      "id": 1
+    }
+  ],
+  "bancos": [
+    {
+      "numero": "001",
+      "nome": "Banco do Brasil",
+      "id": 1
     }
   ]
 }

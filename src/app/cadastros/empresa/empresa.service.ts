@@ -10,7 +10,6 @@ export class EmpresaService extends ResourceService<Empresa> {
   constructor(http: HttpClient) {
     super(
       http,
-      'localhost',
       'empresas',
       new EmpresaSerializer()
     );

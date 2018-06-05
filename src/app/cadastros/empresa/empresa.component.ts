@@ -13,10 +13,7 @@ import {FormControl} from '@angular/forms';
 })
 export class EmpresaComponent implements OnInit {
 
-  empresas = [
-    {id: 1, fantasia: 'Casa da Moeda', razao_social: 'Casa da Moeda do Brasil Ltda',
-      cnpj: '01.000.000/0001-00', email: 'contato@casadamoeda.gov.br'}
-  ];
+  empresas = [];
   empresa = new Empresa();
   index = 0;
   modalRef: BsModalRef;

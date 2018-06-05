@@ -20,9 +20,10 @@
         <td>{{d.descricao}}</td>
         <td>{{d.numero}}</td>
         <td>{{d.digito}}</td>
-        <td>{{d.saldo_atual}}</td>
-        <td>{{d.agencia.numero}}</td>
-        <td>{{d.empresa.razao_social}}</td>
+        <td>{{d.saldoAtual | number: '1.2-2'}}</td>
+        <td *ngIf="d.agencia !== null">{{d.agencia.numero}}</td>
+        <td *ngIf="d.agencia === null"></td>
+        <td>{{d.empresa.razaoSocial}}</td>
         <td>
           <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
              (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
@@ -53,6 +54,11 @@
       <div class="ui-g-12">
 
         <div class="ui-g-12 ui-fluid">
+          <p-checkbox name="caixinha" binary="true" label="Carteira?" #carteira
+                      [(ngModel)]="conta.caixinha"></p-checkbox>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="descricao" type="text" pInputText name="descricao"
                      [(ngModel)]="conta.descricao" required>
@@ -62,7 +68,7 @@
 
         <div class="ui-g-4 ui-fluid">
             <span class="ui-float-label">
-              <input id="numero" type="text" pInputText name="numero" #numero="ngModel"
+              <input id="numero" type="text" pInputText name="numero"
                      [(ngModel)]="conta.numero">
               <label for="numero">Número</label>
             </span>
@@ -78,21 +84,21 @@
         <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="saldo_inicial" type="text" pInputText name="saldo_inicial"
-                     [(ngModel)]="conta.saldo_incial"
+                     [(ngModel)]="conta.saldoInicial"
                      currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }">
               <label for="digito">Saldo inicial</label>
             </span>
         </div>
 
-        <div class="ui-g-6 ui-fluid">
-          <label>Agência</label>
+        <div class="ui-g-6 ui-fluid" *ngIf="conta.agencia !== null">
+          <label>Agência*</label>
           <p-dropdown name="agencia" placeholder="Selecione:" [autoWidth]="false" [options]="agencias"
-                      [(ngModel)]="conta.agencia"></p-dropdown>
+                      [(ngModel)]="conta.agencia.id" [disabled]="carteira.checked"></p-dropdown>
         </div>
         <div class="ui-g-6 ui-fluid">
           <label>Empresa*</label>
           <p-dropdown name="empresa" placeholder="Selecione:" [autoWidth]="false" [options]="empresas"
-                      [(ngModel)]="conta.empresa" required></p-dropdown>
+                      [(ngModel)]="conta.empresa.id" required></p-dropdown>
         </div>
 
         <div class="ui-g-12">

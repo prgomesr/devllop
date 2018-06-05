@@ -5,8 +5,8 @@ export class ConvenioSerializer {
     const convenio = new Convenio();
     convenio.id = json.id;
     convenio.numero = json.numero;
-    convenio.tx_juros = json.tx_juros;
-    convenio.tx_multa = json.tx_multa;
+    convenio.txJuros = json.txJuros;
+    convenio.txMulta = json.txMulta;
     convenio.conta = json.conta;
 
     return convenio;
@@ -16,8 +16,8 @@ export class ConvenioSerializer {
     return {
       id: convenio.id,
       numero: convenio.numero,
-      tx_juros: convenio.tx_juros,
-      tx_multa: convenio.tx_multa,
+      txJuros: convenio.txJuros,
+      txMulta: convenio.txMulta,
       conta: convenio.conta
     };
   }

@@ -10,7 +10,6 @@ export class ContaService extends ResourceService<Conta> {
   constructor(http: HttpClient) {
     super(
       http,
-      'localhost',
       'contas',
       new ContaSerializer()
     );

@@ -15,7 +15,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-f>
       <tr>
-        <td class="text-table-left">{{f.razao_social}}</td>
+        <td class="text-table-left">{{f.razaoSocial}}</td>
         <td>{{f.fantasia}}</td>
         <td>{{f.cnpj | cnpj}}</td>
         <td>{{f.telefonePrincipal | telefone}}</td>
@@ -66,7 +66,7 @@
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="razao" type="text" pInputText name="razao" #razao="ngModel"
-                     [(ngModel)]="fornecedor.razao_social" required>
+                     [(ngModel)]="fornecedor.razaoSocial" required>
               <label for="razao">Razão Social*</label>
             </span>
             </div>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="ui-g-12 ui-fluid">
-              <p-checkbox name="isento" value="false" label="Isento?" #isento
+              <p-checkbox name="isento" binary="true" label="Isento?" #isento
                           [(ngModel)]="fornecedor.isento"></p-checkbox>
             </div>
 

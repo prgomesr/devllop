@@ -5,21 +5,20 @@ import {QueryOptions} from './query-options';
 import 'rxjs/add/operator/map';
 
 export class ResourceService<T extends Resource> {
+  url = 'http://localhost:8080'
   constructor(private httpClient: HttpClient,
-              private url: string,
               private endpoint: string,
               private serializer: Serializer) {}
 
   public create(item: T): Observable<T> {
     return this.httpClient
-      .post<T>(`${this.url}/${this.endpoint}`, this.headers(), this.serializer.toJson(item))
+      .post<T>(`${this.url}/${this.endpoint}`, this.serializer.toJson(item), this.headers())
       .map(data => this.serializer.fromJson(data) as T);
   }
 
   public update(item: T): Observable<T> {
     return this.httpClient
-      .put<T>(`${this.url}/${this.endpoint}/${item.id}`,
-        this.serializer.toJson(item))
+      .put<T>(`${this.url}/${this.endpoint}/${item.id}`, this.serializer.toJson(item), this.headers())
       .map(data => this.serializer.fromJson(data) as T);
   }
 
@@ -36,7 +35,7 @@ export class ResourceService<T extends Resource> {
       })
     };
     return this.httpClient
-      .get<any[]>(`${this.url}/${this.endpoint}`, httpOptions);
+      .get<any[]>(`${this.url}/${this.endpoint}`, this.headers());
   }
 
   delete(id: number) {

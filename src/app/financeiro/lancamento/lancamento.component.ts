@@ -56,7 +56,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllContas() {
     this.contaService.list().subscribe(dados => this.contas = dados
-        .map(d => ({value: d.id, label: d.numero})),
+        .map(d => ({value: d.id, label: d.descricao})),
       error1 => this.errorHandler.handle(error1));
   }
 
@@ -74,7 +74,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllFornecedores() {
     this.fornecedorService.list().subscribe(dados => this.fornecedores = dados
-        .map(d => ({value: d.id, label: d.razao_social})),
+        .map(d => ({value: d.id, label: d.razaoSocial})),
       error1 => this.errorHandler.handle(error1));
   }
 

@@ -60,7 +60,6 @@ export class TipoLancamentoComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Tipo de Lançamento cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
       err => this.errorHandler.handle(err));
   }

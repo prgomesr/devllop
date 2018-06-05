@@ -7,12 +7,12 @@ export class EmpresaSerializer {
     empresa.id = json.id;
     empresa.cnpj = json.cnpj;
     empresa.fantasia = json.fantasia;
-    empresa.razao_social = json.razao_social;
-    empresa.insc_estadual = json.insc_estadual;
-    empresa.insc_municipal = json.insc_municipal;
+    empresa.razaoSocial = json.razaoSocial;
+    empresa.inscEstadual = json.inscEstadual;
+    empresa.inscMunicipal = json.inscMunicipal;
     empresa.isento = json.isento;
     empresa.email = json.email;
-    empresa.data_fundacao = moment (json.data_fundacao, 'YYYY-MM-DD').toDate();
+    empresa.dataFundacao = moment (json.dataFundacao, 'YYYY-MM-DD').toDate();
     return empresa;
   }
 
@@ -21,12 +21,12 @@ export class EmpresaSerializer {
       id: empresa.id,
       cnpj: empresa.cnpj,
       fantasia: empresa.fantasia,
-      razao_social: empresa.razao_social,
-      insc_estadual: empresa.insc_estadual,
-      insc_municipal: empresa.insc_municipal,
+      razaoSocial: empresa.razaoSocial,
+      inscEstadual: empresa.inscEstadual,
+      inscMunicipal: empresa.inscMunicipal,
       isento: empresa.isento,
       email: empresa.email,
-      data_fundacao: empresa.data_fundacao
+      dataFundacao: empresa.dataFundacao
     };
   }
 }

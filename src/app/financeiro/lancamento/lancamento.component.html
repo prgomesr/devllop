@@ -18,12 +18,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-d>
       <tr>
-        <td *ngIf="lancamento.tipo === 'RECEITA'">{{d.cliente.nome}}</td>
-        <td *ngIf="lancamento.tipo === 'DESPESA'">{{d.fornecedor.razao_social}}</td>
+        <td *ngIf="d.tipo === 'RECEITA'">{{d.cliente.nome}}</td>
+        <td *ngIf="d.tipo === 'DESPESA'">{{d.fornecedor.razaoSocial}}</td>
         <td>{{d.descricao}}</td>
-        <td [style.color]="lancamento.tipo === 'RECEITA' ? 'blue' : 'red'">{{d.valor}}</td>
-        <td>{{d.data_vencimento}}</td>
-        <td>{{d.data_pagamento}}</td>
+        <td [style.color]="d.tipo === 'DESPESA' ? 'red' : 'blue'">{{d.valor | number:'1.2-2'}}</td>
+        <td>{{d.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+        <td>{{d.dataPagamento | date: 'dd/MM/yyyy'}}</td>
         <td>{{d.situacao}}</td>
         <td></td>
       </tr>
@@ -49,8 +49,8 @@
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
 
       <div class="ui-g-12 ui-fluid">
-        <p-checkbox name="conta_fixa" value="true" label="É um lançamento fixo?"
-                    [(ngModel)]="lancamento.conta_fixa" required></p-checkbox>
+        <p-checkbox name="conta_fixa" binary="true" label="É um lançamento fixo?"
+                    [(ngModel)]="lancamento.contaFixa" required></p-checkbox>
       </div>
 
       <div class="ui-g-6 ui-fluid">
@@ -96,14 +96,14 @@
       <div class="ui-g-6 ui-fluid">
         <span class="ui-float-label">
           <p-calendar name="vencimento" dateFormat="dd/mm/yy" id="vencimento"
-                      [(ngModel)]="lancamento.data_vencimento" required></p-calendar>
+                      [(ngModel)]="lancamento.dataVencimento" required></p-calendar>
           <label for="vencimento">Vencimento</label>
         </span>
       </div>
       <div class="ui-g-6 ui-fluid">
         <span class="ui-float-label">
           <input id="documento" type="text" pInputText name="documento"
-                 [(ngModel)]="lancamento.num_documento">
+                 [(ngModel)]="lancamento.numDocumento">
           <label for="documento">Número do documento</label>
         </span>
       </div>
@@ -111,7 +111,7 @@
       <div class="ui-g-12 ui-fluid" *ngIf="lancamento.tipo === 'DESPESA'">
         <span class="ui-float-label">
           <input id="num_nf" type="text" pInputText name="num_nf"
-                 [(ngModel)]="lancamento.num_nf">
+                 [(ngModel)]="lancamento.numNf">
           <label for="documento">Número da nota fiscal</label>
         </span>
       </div>
@@ -122,6 +122,10 @@
                     [(ngModel)]="lancamento.observacao"></textarea>
           <label for="observacao">Observação</label>
         </span>
+      </div>
+
+      <div class="ui-g-12">
+        <button type="submit" pButton label="Salvar" class="btn-primary"></button>
       </div>
 
     </form>
