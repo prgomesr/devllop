@@ -16,9 +16,9 @@
     <ng-template pTemplate="body" let-d>
       <tr>
         <td class="text-table-left">{{d.numero}}</td>
-        <td>{{d.tx_juros}}</td>
-        <td>{{d.tx_multa}}</td>
-        <td>{{d.conta.numero}}</td>
+        <td>{{d.txJuros}}</td>
+        <td>{{d.txMulta}}</td>
+        <td>{{d.conta.descricao}}</td>
         <td>
           <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
              (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
@@ -59,7 +59,7 @@
         <div class="ui-g-6 ui-fluid">
           <span class="ui-float-label">
             <input type="text" pInputText name="tx_juros" id="tx_juros"
-                   [(ngModel)]="convenio.tx_juros"
+                   [(ngModel)]="convenio.txJuros"
                    currencyMask [options]="{ prefix: '% ', thousands: '.', decimal: ',', allowNegative: false }">
             <label for="tx_juros">Taxa de Juros</label>
           </span>
@@ -67,7 +67,7 @@
         <div class="ui-g-6 ui-fluid">
           <span class="ui-float-label">
             <input type="text" pInputText name="tx_multa" id="tx_multa"
-                   [(ngModel)]="convenio.tx_multa"
+                   [(ngModel)]="convenio.txMulta"
                    currencyMask [options]="{ prefix: '% ', thousands: '.', decimal: ',', allowNegative: false }">
             <label for="tx_multa">Taxa de Multa</label>
           </span>

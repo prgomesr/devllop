@@ -108,7 +108,9 @@ export class LancamentoComponent implements OnInit {
   }
 
   close() {
-    this.modalRef2.hide();
+    if (this.modalRef2) {
+      this.modalRef2.hide();
+    }
   }
 
   onSubmit(form) {
@@ -134,6 +136,7 @@ export class LancamentoComponent implements OnInit {
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
+        console.log(form.value);
       }
       , error1 => this.errorHandler.handle(error1));
   }

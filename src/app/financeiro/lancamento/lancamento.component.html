@@ -25,7 +25,12 @@
         <td>{{d.dataVencimento | date: 'dd/MM/yyyy'}}</td>
         <td>{{d.dataPagamento | date: 'dd/MM/yyyy'}}</td>
         <td>{{d.situacao}}</td>
-        <td></td>
+        <td>
+          <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
+             (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
+          <a href="javascript:void (0)" pTooltip="Excluir" tooltipPosition="top"
+             (click)="openConfirmModal(confirmModal, d.id)"><i class="fa fa-trash"></i></a>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
@@ -97,7 +102,7 @@
         <span class="ui-float-label">
           <p-calendar name="vencimento" dateFormat="dd/mm/yy" id="vencimento"
                       [(ngModel)]="lancamento.dataVencimento" required></p-calendar>
-          <label for="vencimento">Vencimento</label>
+          <label for="vencimento">Vencimento*</label>
         </span>
       </div>
       <div class="ui-g-6 ui-fluid">

@@ -68,7 +68,7 @@ export class Conta extends Resource {
   digito: string;
   saldoInicial: number;
   saldoAtual: number;
-  caixinha = false;
+  carteira = false;
   agencia = new Agencia();
   empresa = new Empresa();
 }

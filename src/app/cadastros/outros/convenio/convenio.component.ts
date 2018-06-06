@@ -36,7 +36,7 @@ export class ConvenioComponent implements OnInit {
 
   getAllContas() {
     this.contaService.list().subscribe(dados => this.contas = dados
-        .map(d => ({value: d.id, label: d.numero})),
+        .map(d => ({value: d.id, label: d.descricao})),
       error1 => this.errorHandler.handle(error1));
   }
 
