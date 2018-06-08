@@ -5,6 +5,7 @@ import {Banco} from '../../../core/model';
 import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {BancoService} from './banco.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-banco',
@@ -20,13 +21,15 @@ export class BancoComponent implements OnInit {
   constructor(private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
-              private bancoService: BancoService) { }
+              private bancoService: BancoService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
+    this.spinner.show();
     this.bancoService.list().subscribe(dados => this.bancos = dados,
       error1 => this.errorHandler.handle(error1));
   }

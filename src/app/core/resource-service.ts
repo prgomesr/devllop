@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {QueryOptions} from './query-options';
 import 'rxjs/add/operator/map';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 export class ResourceService<T extends Resource> {
   url = 'http://localhost:8080'

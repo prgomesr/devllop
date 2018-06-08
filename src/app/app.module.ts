@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ToastyModule} from 'ng2-toasty';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import {CoreModule} from './core/core.module';
 
@@ -19,7 +20,8 @@ import {CoreModule} from './core/core.module';
     CoreModule,
     HttpClientModule,
     AppRoutingModule,
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
