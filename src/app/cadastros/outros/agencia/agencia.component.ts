@@ -6,6 +6,7 @@ import {ToastyService} from 'ng2-toasty';
 import {AgenciaService} from './agencia.service';
 import {FormControl} from '@angular/forms';
 import {BancoService} from '../banco/banco.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-agencia',
@@ -23,26 +24,48 @@ export class AgenciaComponent implements OnInit {
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
               private agenciaService: AgenciaService,
-              private bancoService: BancoService) { }
+              private bancoService: BancoService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.agenciaService.list().subscribe(dados => this.agencias = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.agenciaService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.agencias = dados;
+      },
+      error1 => {
+      this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getById(id: number) {
-    this.agenciaService.read(id).subscribe(dado => this.agencia = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.agenciaService.read(id).subscribe(dado => {
+      this.spinner.hide();
+      this.agencia = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllBancos() {
-    this.bancoService.list().subscribe(dados => this.bancos = dados
-        .map(d => ({value: d.id, label: d.nome})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.bancoService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.bancos = dados
+          .map(d => ({value: d.id, label: d.nome}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -64,21 +87,31 @@ export class AgenciaComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.agenciaService.create(this.agencia).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Agência cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.agenciaService.update(this.agencia).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Agência atualizada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

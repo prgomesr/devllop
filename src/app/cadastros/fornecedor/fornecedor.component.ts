@@ -8,6 +8,7 @@ import {ErrorHandlerService} from '../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {Fornecedor} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-fornecedor',
@@ -25,7 +26,8 @@ export class FornecedorComponent implements OnInit {
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
               private router: Router,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
@@ -33,8 +35,15 @@ export class FornecedorComponent implements OnInit {
 
 
   getAll() {
-    return this.fornecedorService.list().subscribe(dados => this.fornecedores = dados,
-      err => this.errorHandler.handle(err));
+    this.spinner.show();
+    return this.fornecedorService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.fornecedores = dados;
+      },
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   delete(id: number) {
@@ -54,27 +63,43 @@ export class FornecedorComponent implements OnInit {
   }
 
   getById(id: number) {
-    this.fornecedorService.read(id).subscribe(dado => this.fornecedor = dado,
-      err => this.errorHandler.handle(err));
+    this.spinner.show();
+    this.fornecedorService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.fornecedor = dado;
+      },
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.fornecedorService.create(this.fornecedor).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.fornecedorService.update(this.fornecedor).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openNext() {

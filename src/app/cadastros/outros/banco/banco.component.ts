@@ -30,13 +30,24 @@ export class BancoComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    this.bancoService.list().subscribe(dados => this.bancos = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.bancoService.list().subscribe(dado => {
+      this.spinner.hide();
+      this.bancos = dado;
+    }, error1 => {
+      this.spinner.hide();
+      this.errorHandler.handle(error1);
+    });
   }
 
   getById(id: number) {
-    this.bancoService.read(id).subscribe(dado => this.banco = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.bancoService.read(id).subscribe(dado => {
+      this.spinner.hide();
+      this.banco = dado;
+    }, error1 => {
+      this.spinner.hide();
+      this.errorHandler.handle(error1);
+    });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -57,21 +68,31 @@ export class BancoComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.bancoService.create(this.banco).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Banco cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       },
-      err => this.errorHandler.handle(err));
+      err => {
+      this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.bancoService.update(this.banco).subscribe(() => {
+      this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Banco atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+      this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

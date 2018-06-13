@@ -6,6 +6,7 @@ import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {ConvenioService} from './convenio.service';
 import {ContaService} from '../conta/conta.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-convenio',
@@ -23,26 +24,48 @@ export class ConvenioComponent implements OnInit {
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
               private convenioService: ConvenioService,
-              private contaService: ContaService) { }
+              private contaService: ContaService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.convenioService.list().subscribe(dados => this.convenios = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.convenioService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.convenios = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllContas() {
-    this.contaService.list().subscribe(dados => this.contas = dados
-        .map(d => ({value: d.id, label: d.descricao})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.contaService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.contas = dados
+          .map(d => ({value: d.id, label: d.descricao}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getById(id: number) {
-    this.convenioService.read(id).subscribe(dado => this.convenio = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.convenioService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.convenio = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -64,22 +87,31 @@ export class ConvenioComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.convenioService.create(this.convenio).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Convênio cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.convenioService.update(this.convenio).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Convênio atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

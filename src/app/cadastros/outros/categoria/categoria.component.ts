@@ -5,6 +5,7 @@ import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {ToastyService} from 'ng2-toasty';
 import {CategoriaService} from './categoria-service';
 import {FormControl} from '@angular/forms';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-categoria',
@@ -22,20 +23,35 @@ export class CategoriaComponent implements OnInit {
   constructor(private categoriaService: CategoriaService,
               private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
-              private toasty: ToastyService) { }
+              private toasty: ToastyService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.categoriaService.list().subscribe(dados => this.categorias = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.categoriaService.list().subscribe(dados => {
+      this.spinner.hide();
+      this.categorias = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getById(id: number) {
-    this.categoriaService.read(id).subscribe(dado => this.categoria = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.categoriaService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.categoria = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -56,21 +72,31 @@ export class CategoriaComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.categoriaService.create(this.categoria).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Categoria cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.categoriaService.update(this.categoria).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Categoria atualizada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

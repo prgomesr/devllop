@@ -1,9 +1,7 @@
 import {Resource, Serializer} from './model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {QueryOptions} from './query-options';
 import 'rxjs/add/operator/map';
-import {NgxSpinnerService} from 'ngx-spinner';
 
 export class ResourceService<T extends Resource> {
   url = 'http://localhost:8080'
@@ -30,11 +28,6 @@ export class ResourceService<T extends Resource> {
   }
 
   list(): Observable<T[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
     return this.httpClient
       .get<any[]>(`${this.url}/${this.endpoint}`, this.headers());
   }
@@ -42,14 +35,6 @@ export class ResourceService<T extends Resource> {
   delete(id: number) {
     return this.httpClient
       .delete(`${this.url}/${this.endpoint}/${id}`);
-  }
-
-  getCep(cep) {
-    return this.httpClient.get<any>(`https://viacep.com.br/ws/${cep}/json`);
-  }
-
-  private convertData(data: any): T[] {
-    return data.map(item => this.serializer.fromJson(item));
   }
 
   private headers () {

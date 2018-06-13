@@ -5,6 +5,7 @@ import {TipoLancamentoService} from './tipo-lancamento.service';
 import {ErrorHandlerService} from '../../../core/error-handler-service';
 import {FormControl} from '@angular/forms';
 import {ToastyService} from 'ng2-toasty';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-tipo-lancamento',
@@ -22,20 +23,35 @@ export class TipoLancamentoComponent implements OnInit {
   constructor(private modalService: BsModalService,
               private tipoService: TipoLancamentoService,
               private errorHandler: ErrorHandlerService,
-              private toasty: ToastyService) { }
+              private toasty: ToastyService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.tipoService.list().subscribe(dados => this.tipos = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.tipoService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.tipos = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getById(id: number) {
-    this.tipoService.read(id).subscribe(dado => this.tipo = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.tipoService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.tipo = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -56,21 +72,31 @@ export class TipoLancamentoComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.tipoService.create(this.tipo).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Tipo de Lançamento cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.tipoService.update(this.tipo).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Tipo de Lançamento atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

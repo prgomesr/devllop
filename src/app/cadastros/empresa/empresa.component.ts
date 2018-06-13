@@ -5,6 +5,7 @@ import {ToastyService} from 'ng2-toasty';
 import {ErrorHandlerService} from '../../core/error-handler-service';
 import {EmpresaService} from './empresa.service';
 import {FormControl} from '@angular/forms';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-empresa',
@@ -21,21 +22,36 @@ export class EmpresaComponent implements OnInit {
   constructor(private modalService: BsModalService,
               private toasty: ToastyService,
               private errorHandler: ErrorHandlerService,
-              private empresaService: EmpresaService) { }
+              private empresaService: EmpresaService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.empresaService.list().subscribe(dados => this.empresas = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.empresaService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.empresas = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
 
   getById(id: number) {
-    this.empresaService.read(id).subscribe(dado => this.empresa = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.empresaService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.empresa = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -57,22 +73,31 @@ export class EmpresaComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.empresaService.create(this.empresa).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Empresa cadastrada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.empresaService.update(this.empresa).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Empresa atualizada com sucesso.'});
         this.getAll();
         this.modalRef.hide();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {

@@ -10,6 +10,7 @@ import {FornecedorService} from '../../cadastros/fornecedor/fornecedor.service';
 import {ClienteService} from '../../cadastros/cliente/cliente.service';
 import {LancamentoService} from './lancamento.service';
 import {FormControl} from '@angular/forms';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-lancamento',
@@ -38,7 +39,8 @@ export class LancamentoComponent implements OnInit {
               private categoriaService: CategoriaService,
               private tipoService: TipoLancamentoService,
               private fornecedorService: FornecedorService,
-              private clienteService: ClienteService) {
+              private clienteService: ClienteService,
+              private spinner: NgxSpinnerService) {
     this.options = [
       {label: 'Receita', value: 'RECEITA', icon: 'fa fa-plus-square'},
       {label: 'Despesa', value: 'DESPESA', icon: 'fa fa-minus-square'}
@@ -50,43 +52,92 @@ export class LancamentoComponent implements OnInit {
   }
 
   getAll() {
-    this.lancamentoService.list().subscribe(dados => this.lancamentos = dados,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.lancamentoService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.lancamentos = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllContas() {
-    this.contaService.list().subscribe(dados => this.contas = dados
-        .map(d => ({value: d.id, label: d.descricao})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.contaService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.contas = dados
+          .map(d => ({value: d.id, label: d.descricao}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllCategorias() {
-    this.categoriaService.list().subscribe(dados => this.categorias = dados
-        .map(d => ({value: d.id, label: d.descricao})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.categoriaService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.categorias = dados
+          .map(d => ({value: d.id, label: d.descricao}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllTipos() {
-    this.tipoService.list().subscribe(dados => this.tipos = dados
-        .map(d => ({value: d.id, label: d.descricao})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.tipoService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.tipos = dados
+          .map(d => ({value: d.id, label: d.descricao}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllFornecedores() {
-    this.fornecedorService.list().subscribe(dados => this.fornecedores = dados
-        .map(d => ({value: d.id, label: d.razaoSocial})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.fornecedorService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.fornecedores = dados
+          .map(d => ({value: d.id, label: d.razaoSocial}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getAllClientes() {
-    this.clienteService.list().subscribe(dados => this.clientes = dados
-        .map(d => ({value: d.id, label: d.nome})),
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.clienteService.list().subscribe(dados => {
+        this.spinner.hide();
+        this.clientes = dados
+          .map(d => ({value: d.id, label: d.nome}));
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   getById(id: number) {
-    this.lancamentoService.read(id).subscribe(dado => this.lancamento = dado,
-      error1 => this.errorHandler.handle(error1));
+    this.spinner.show();
+    this.lancamentoService.read(id).subscribe(dado => {
+        this.spinner.hide();
+        this.lancamento = dado;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openFormModal(template: TemplateRef<any>, id: number) {
@@ -122,31 +173,44 @@ export class LancamentoComponent implements OnInit {
   }
 
   createModel(form: FormControl) {
+    this.spinner.show();
     this.lancamentoService.create(this.lancamento).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento cadastrado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       },
-      err => this.errorHandler.handle(err));
+      err => {
+        this.spinner.hide();
+        this.errorHandler.handle(err);
+      });
   }
 
   updateModel(form: FormControl) {
+    this.spinner.show();
     this.lancamentoService.update(this.lancamento).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento atualizado com sucesso.'});
         this.getAll();
         this.modalRef.hide();
-        console.log(form.value);
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   delete(id: number) {
+    this.spinner.show();
     this.lancamentoService.delete(id).subscribe(() => {
+        this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento excluído com sucesso.'});
         this.getAll();
       }
-      , error1 => this.errorHandler.handle(error1));
+      , error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
   }
 
   openConfirmModal(template: TemplateRef<any>, id: number) {

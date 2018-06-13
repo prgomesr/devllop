@@ -7,7 +7,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th class="text-table-left" style="width: 120px">Número</th>
-        <th>Nome</th>
+        <th class="text-table-left">Nome</th>
         <th style="width: 180px">Telefone</th>
         <th style="width: 80px"></th>
       </tr>
@@ -15,7 +15,7 @@
     <ng-template pTemplate="body" let-d>
       <tr>
         <td class="text-table-left">{{d.numero}}</td>
-        <td>{{d.nome}}</td>
+        <td class="text-table-left">{{d.nome}}</td>
         <td>{{d.telefone}}</td>
         <td>
           <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
