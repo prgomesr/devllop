@@ -31,7 +31,7 @@ export class InstResourceService<T extends Resource> {
 
   list(): Observable<any> {
   return this.http
-    .get(`${this.url}/${this.endpoint}`)
+    .get(`${this.url}/${this.endpoint}?resumo`)
     .map((data: any) => data.content);
   }
 

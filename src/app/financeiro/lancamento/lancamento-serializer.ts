@@ -36,6 +36,9 @@ export class LancamentoSerializer {
       descricao: lancamento.descricao,
       valor: lancamento.valor,
       valorRecebido: lancamento.valorRecebido,
+      dataVencimento: lancamento.dataVencimento,
+      dataPagamento: lancamento.dataPagamento,
+      dataBalanco: lancamento.dataBalanco,
       observacao: lancamento.observacao,
       contaFixa: lancamento.contaFixa,
       numDocumento: lancamento.numDocumento,
@@ -43,7 +46,12 @@ export class LancamentoSerializer {
       nossoNumero: lancamento.nossoNumero,
       valorJuros: lancamento.valorJuros,
       valorMulta: lancamento.valorMulta,
-      situacao: lancamento.situacao
+      situacao: lancamento.situacao,
+      conta: lancamento.conta,
+      categoria: lancamento.categoria,
+      tipoLancamento: lancamento.tipoLancamento,
+      fornecedor: lancamento.fornecedor,
+      cliente: lancamento.cliente
     };
   }
 }
