@@ -1,12 +1,8 @@
 import {Resource, Serializer} from './model';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {InstanciasFiltro} from './InstanciasFiltro';
 // import 'rxjs/add/operator/map';
-
-export interface PessoaFiltro {
-  nome: string;
-  cpf: string;
-}
 
 export class InstResourceService<T extends Resource> {
   url = 'http://localhost:8080';
@@ -34,24 +30,56 @@ export class InstResourceService<T extends Resource> {
       .map((data: any) => this.serializer.fromJson(data) as T);
   }
 
-  list(term: string): Observable<any> {
-    term = term.trim();
-    const options = term ?
-      {params: new HttpParams().set('nome', term)} : {};
+  list(filtro: InstanciasFiltro): Observable<any> {
+    let params = new HttpParams();
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
+    if (filtro.nome) {
+      params = params.set('nome', filtro.nome);
+    }
+    if (filtro.cpf) {
+      params = params.set('cpf', filtro.cpf);
+    }
+    if (filtro.sexo) {
+      params = params.set('sexo', filtro.sexo);
+    }
+    if (filtro.situacao) {
+      params = params.set('situacao', filtro.situacao);
+    }
+    if (filtro.ativo) {
+      params = params.set('ativo', filtro.ativo.toString());
+    }
   return this.http
-    .get(`${this.url}/${this.endpoint}?resumo`, options)
-    .map((data: any) => data.content);
+    .get(`${this.url}/${this.endpoint}?resumo`, {params})
+    .map((data: any) => {
+      const result = {
+        registros: data.content,
+        total: data.totalElements
+      };
+      return result;
+    });
   }
 
-  search(filtro: any): Observable<any> {
-    const options = filtro ?
-      {
-        params: new HttpParams().append('nome', filtro.nome)
-          .append('cpf', filtro.cpf)
-      } : {};
-    return this.http.get(`${this.url}/${this.endpoint}?resumo`,  options)
+  /* search(filtro: InstanciasFiltro): Observable<any> {
+    let params = new HttpParams();
+      if (filtro.nome) {
+        params = params.set('nome', filtro.nome);
+      }
+      if (filtro.cpf) {
+        params = params.set('cpf', filtro.cpf);
+      }
+      if (filtro.sexo) {
+        params = params.set('sexo', filtro.sexo);
+      }
+      if (filtro.situacao) {
+        params = params.set('situacao', filtro.situacao);
+      }
+      if (filtro.ativo) {
+        params = params.set('ativo', filtro.ativo.toString());
+      }
+    return this.http.get(`${this.url}/${this.endpoint}?resumo`,  {params})
       .map((data: any) => data.content);
-  }
+  } */
 
   delete(id: number) {
     return this.http

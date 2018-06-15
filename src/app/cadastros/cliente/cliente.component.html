@@ -1,21 +1,53 @@
 <app-header-lv1 heading="Clientes"></app-header-lv1>
 
-<div class="ui-g-12">
-  <form (ngSubmit)="filter()" autocomplete="off">
-    <div class="ui-g-12">
-      <input type="text" pInputText name="nome" [(ngModel)]="nome">
-    </div>
-    <div class="ui-g-12">
-      <input type="text" pInputText name="cpf" [(ngModel)]="cpf">
+<div>
+  <form #fFiltro="ngForm" (ngSubmit)="getAll()" autocomplete="off">
+
+    <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="filtroNome" type="text" pInputText name="nome"
+                     [(ngModel)]="filtro.nome">
+              <label for="filtroNome">Nome</label>
+            </span>
     </div>
 
-    <button type="submit" pButton label="Pesquisar"></button>
+    <div class="ui-g-6 ui-fluid">
+        <span class="ui-float-label">
+              <input id="filtroCpf" type="text" pInputText name="cpf" mask="999.999.999-99"
+                     [(ngModel)]="filtro.cpf">
+              <label for="filtroCpf">CPF</label>
+            </span>
+    </div>
+
+
+      <div class="ui-g-4 ui-fluid">
+        <label>Sexo</label>
+        <p-dropdown name="sexo" placeholder="Selecione:" [autoWidth]="false" [options]="sexos"
+                    [(ngModel)]="filtro.sexo"></p-dropdown>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Situação</label>
+        <p-dropdown name="situacao" placeholder="Selecione:" [autoWidth]="false" [options]="situacoes"
+                    [(ngModel)]="filtro.situacao"></p-dropdown>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <label>Status</label>
+        <p-dropdown name="status" [autoWidth]="false" [options]="status"
+                    [(ngModel)]="filtro.ativo"></p-dropdown>
+      </div>
+
+    <div class="ui-g-12">
+      <button type="submit" pButton label="Pesquisar"></button>
+      <button type="button" pButton label="Limpar" class="ui-button-secondary"
+              (click)="fFiltro.reset()"></button>
+    </div>
   </form>
 </div>
 
 <div class="ui-g-12">
   <a href="javascript:void (0)" (click)="openFormModal(formModal)"><i class="fa fa-plus"></i> Novo</a>
-  <p-table [value]="clientes" [paginator]="true" [rows]="10" [responsive]="true">
+  <p-table [value]="clientes" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true"
+    [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th class="text-table-left">Nome</th>

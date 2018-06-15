@@ -9,6 +9,7 @@ import {ToastyService} from 'ng2-toasty';
 import {Fornecedor} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {InstanciasFiltro} from '../../core/InstanciasFiltro';
 
 @Component({
   selector: 'app-fornecedor',
@@ -22,6 +23,7 @@ export class FornecedorComponent implements OnInit {
   index = 0;
   modalRef: BsModalRef;
   id: number;
+  filtro = new InstanciasFiltro();
   constructor(private fornecedorService: FornecedorService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
@@ -36,7 +38,7 @@ export class FornecedorComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    return this.fornecedorService.list('').subscribe(dados => {
+    return this.fornecedorService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
         this.fornecedores = dados;
       },
@@ -126,8 +128,15 @@ export class FornecedorComponent implements OnInit {
       const validacep = /^[0-9]{8}$/;
       // Valida o formato do CEP.
       if (validacep.test(cep)) {
-        this.fornecedorService.getCep(cep).subscribe(dados => this.popularEndereco(dados, form),
-          err => this.errorHandler.handle(err));
+        this.spinner.show();
+        this.fornecedorService.getCep(cep).subscribe(dados => {
+            this.spinner.hide();
+            this.popularEndereco(dados, form);
+          },
+          err => {
+            this.spinner.hide();
+            this.errorHandler.handle(err);
+          });
       }
     }
   }

@@ -11,6 +11,7 @@ import {ClienteService} from '../../cadastros/cliente/cliente.service';
 import {LancamentoService} from './lancamento.service';
 import {FormControl} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {InstanciasFiltro} from '../../core/InstanciasFiltro';
 
 @Component({
   selector: 'app-lancamento',
@@ -31,6 +32,7 @@ export class LancamentoComponent implements OnInit {
   modalRef2: BsModalRef;
   lancamento = new Lancamento();
   options = [];
+  filtro = new InstanciasFiltro();
   constructor(private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
@@ -53,7 +55,7 @@ export class LancamentoComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    this.lancamentoService.list('').subscribe(dados => {
+    this.lancamentoService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
         this.lancamentos = dados;
       },
@@ -104,7 +106,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllFornecedores() {
     this.spinner.show();
-    this.fornecedorService.list('').subscribe(dados => {
+    this.fornecedorService.list(null).subscribe(dados => {
         this.spinner.hide();
         this.fornecedores = dados
           .map(d => ({value: d.id, label: d.razaoSocial}));
@@ -117,7 +119,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllClientes() {
     this.spinner.show();
-    this.clienteService.list('').subscribe(dados => {
+    this.clienteService.list(null).subscribe(dados => {
         this.spinner.hide();
         this.clientes = dados
           .map(d => ({value: d.id, label: d.nome}));

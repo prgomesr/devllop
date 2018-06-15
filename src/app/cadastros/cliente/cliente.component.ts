@@ -7,6 +7,8 @@ import {ToastyService} from 'ng2-toasty';
 import {ErrorHandlerService} from '../../core/error-handler-service';
 import {EstadoCivilService} from './estado-civil.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {InstanciasFiltro} from '../../core/InstanciasFiltro';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-cliente',
@@ -21,12 +23,19 @@ export class ClienteComponent implements OnInit {
     {label: 'Masculino', value: 'M'},
     {label: 'Feminino', value: 'F'}
   ];
+  situacoes = [
+    {label: 'Em dia', value: 'EM DIA'}
+  ];
+  status = [
+    {label: 'Ativo', value: 'true'},
+    {label: 'Inativo', value: 'false'}
+  ];
   cliente = new Cliente();
   index = 0;
   modalRef: BsModalRef;
   id: number;
-  nome = 'ana';
-  cpf = '999';
+  totalRegistros = 0;
+  filtro = new InstanciasFiltro();
   constructor(private clienteService: ClienteService,
               private estadoCivilService: EstadoCivilService,
               private modalService: BsModalService,
@@ -34,15 +43,15 @@ export class ClienteComponent implements OnInit {
               private errorHandler: ErrorHandlerService,
               private spinner: NgxSpinnerService) { }
 
-  ngOnInit() {
-    this.getAll();
-  }
+  ngOnInit() {}
 
-  getAll() {
+  getAll(pagina = 0) {
     this.spinner.show();
-    this.clienteService.list(this.nome).subscribe(dados => {
+    this.filtro.pagina = pagina;
+    this.clienteService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
-        this.clientes = dados;
+        this.clientes = dados.registros;
+        this.totalRegistros = dados.total;
       },
       error1 => {
         this.spinner.hide();
@@ -50,10 +59,15 @@ export class ClienteComponent implements OnInit {
       });
   }
 
-  filter() {
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.getAll(pagina);
+  }
+
+  /* filter(form) {
     this.spinner.show();
-    console.log('entrou', this.nome);
-    this.clienteService.search({nome: this.nome, cpf: this.cpf}).subscribe(dados => {
+    this.clienteService.search(this.filtro)
+      .subscribe(dados => {
         this.spinner.hide();
         this.clientes = dados;
       },
@@ -61,7 +75,7 @@ export class ClienteComponent implements OnInit {
         this.spinner.hide();
         this.errorHandler.handle(error1);
       });
-  }
+  } */
 
   getEstadosCivis() {
     this.spinner.show();
@@ -168,8 +182,15 @@ export class ClienteComponent implements OnInit {
       const validacep = /^[0-9]{8}$/;
       // Valida o formato do CEP.
       if (validacep.test(cep)) {
-        this.clienteService.getCep(cep).subscribe(dados => this.popularEndereco(dados, form),
-          err => this.errorHandler.handle(err));
+        this.spinner.show();
+        this.clienteService.getCep(cep).subscribe(dados => {
+            this.spinner.hide();
+            this.popularEndereco(dados, form);
+          },
+          err => {
+            this.spinner.hide();
+            this.errorHandler.handle(err);
+          });
       }
     }
   }
