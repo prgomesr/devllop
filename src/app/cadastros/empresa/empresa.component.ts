@@ -77,6 +77,7 @@ export class EmpresaComponent implements OnInit {
     this.empresaService.create(this.empresa).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Empresa cadastrada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -91,6 +92,7 @@ export class EmpresaComponent implements OnInit {
     this.empresaService.update(this.empresa).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Empresa atualizada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

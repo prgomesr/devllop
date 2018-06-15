@@ -76,6 +76,7 @@ export class TipoLancamentoComponent implements OnInit {
     this.tipoService.create(this.tipo).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Tipo de Lançamento cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -90,6 +91,7 @@ export class TipoLancamentoComponent implements OnInit {
     this.tipoService.update(this.tipo).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Tipo de Lançamento atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

@@ -76,6 +76,7 @@ export class CategoriaComponent implements OnInit {
     this.categoriaService.create(this.categoria).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Categoria cadastrada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -90,6 +91,7 @@ export class CategoriaComponent implements OnInit {
     this.categoriaService.update(this.categoria).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Categoria atualizada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

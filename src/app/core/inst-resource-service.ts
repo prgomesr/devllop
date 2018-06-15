@@ -1,7 +1,12 @@
 import {Resource, Serializer} from './model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 // import 'rxjs/add/operator/map';
+
+export interface PessoaFiltro {
+  nome: string;
+  cpf: string;
+}
 
 export class InstResourceService<T extends Resource> {
   url = 'http://localhost:8080';
@@ -29,10 +34,23 @@ export class InstResourceService<T extends Resource> {
       .map((data: any) => this.serializer.fromJson(data) as T);
   }
 
-  list(): Observable<any> {
+  list(term: string): Observable<any> {
+    term = term.trim();
+    const options = term ?
+      {params: new HttpParams().set('nome', term)} : {};
   return this.http
-    .get(`${this.url}/${this.endpoint}?resumo`)
+    .get(`${this.url}/${this.endpoint}?resumo`, options)
     .map((data: any) => data.content);
+  }
+
+  search(filtro: any): Observable<any> {
+    const options = filtro ?
+      {
+        params: new HttpParams().append('nome', filtro.nome)
+          .append('cpf', filtro.cpf)
+      } : {};
+    return this.http.get(`${this.url}/${this.endpoint}?resumo`,  options)
+      .map((data: any) => data.content);
   }
 
   delete(id: number) {

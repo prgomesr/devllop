@@ -91,6 +91,7 @@ export class ConvenioComponent implements OnInit {
     this.convenioService.create(this.convenio).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Convênio cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -105,6 +106,7 @@ export class ConvenioComponent implements OnInit {
     this.convenioService.update(this.convenio).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Convênio atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

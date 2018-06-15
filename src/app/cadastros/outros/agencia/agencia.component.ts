@@ -91,6 +91,7 @@ export class AgenciaComponent implements OnInit {
     this.agenciaService.create(this.agencia).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Agência cadastrada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -105,6 +106,7 @@ export class AgenciaComponent implements OnInit {
     this.agenciaService.update(this.agencia).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Agência atualizada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

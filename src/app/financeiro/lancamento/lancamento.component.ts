@@ -53,7 +53,7 @@ export class LancamentoComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    this.lancamentoService.list().subscribe(dados => {
+    this.lancamentoService.list('').subscribe(dados => {
         this.spinner.hide();
         this.lancamentos = dados;
       },
@@ -104,7 +104,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllFornecedores() {
     this.spinner.show();
-    this.fornecedorService.list().subscribe(dados => {
+    this.fornecedorService.list('').subscribe(dados => {
         this.spinner.hide();
         this.fornecedores = dados
           .map(d => ({value: d.id, label: d.razaoSocial}));
@@ -117,7 +117,7 @@ export class LancamentoComponent implements OnInit {
 
   getAllClientes() {
     this.spinner.show();
-    this.clienteService.list().subscribe(dados => {
+    this.clienteService.list('').subscribe(dados => {
         this.spinner.hide();
         this.clientes = dados
           .map(d => ({value: d.id, label: d.nome}));
@@ -177,6 +177,7 @@ export class LancamentoComponent implements OnInit {
     this.lancamentoService.create(this.lancamento).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -191,6 +192,7 @@ export class LancamentoComponent implements OnInit {
     this.lancamentoService.update(this.lancamento).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Lançamento atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

@@ -36,7 +36,7 @@ export class FornecedorComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    return this.fornecedorService.list().subscribe(dados => {
+    return this.fornecedorService.list('').subscribe(dados => {
         this.spinner.hide();
         this.fornecedores = dados;
       },
@@ -79,6 +79,7 @@ export class FornecedorComponent implements OnInit {
     this.fornecedorService.create(this.fornecedor).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -93,6 +94,7 @@ export class FornecedorComponent implements OnInit {
     this.fornecedorService.update(this.fornecedor).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

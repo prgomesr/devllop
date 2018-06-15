@@ -1,6 +1,19 @@
 <app-header-lv1 heading="Clientes"></app-header-lv1>
 
 <div class="ui-g-12">
+  <form (ngSubmit)="filter()" autocomplete="off">
+    <div class="ui-g-12">
+      <input type="text" pInputText name="nome" [(ngModel)]="nome">
+    </div>
+    <div class="ui-g-12">
+      <input type="text" pInputText name="cpf" [(ngModel)]="cpf">
+    </div>
+
+    <button type="submit" pButton label="Pesquisar"></button>
+  </form>
+</div>
+
+<div class="ui-g-12">
   <a href="javascript:void (0)" (click)="openFormModal(formModal)"><i class="fa fa-plus"></i> Novo</a>
   <p-table [value]="clientes" [paginator]="true" [rows]="10" [responsive]="true">
     <ng-template pTemplate="header" let-columns>

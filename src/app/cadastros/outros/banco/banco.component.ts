@@ -72,6 +72,7 @@ export class BancoComponent implements OnInit {
     this.bancoService.create(this.banco).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Banco cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -86,6 +87,7 @@ export class BancoComponent implements OnInit {
     this.bancoService.update(this.banco).subscribe(() => {
       this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Banco atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

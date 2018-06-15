@@ -108,6 +108,7 @@ export class ContaComponent implements OnInit {
     this.contaService.create(this.conta).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Conta cadastrada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -122,6 +123,7 @@ export class ContaComponent implements OnInit {
     this.contaService.update(this.conta).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Conta atualizada com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }

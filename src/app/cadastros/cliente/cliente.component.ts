@@ -25,6 +25,8 @@ export class ClienteComponent implements OnInit {
   index = 0;
   modalRef: BsModalRef;
   id: number;
+  nome = 'ana';
+  cpf = '999';
   constructor(private clienteService: ClienteService,
               private estadoCivilService: EstadoCivilService,
               private modalService: BsModalService,
@@ -38,7 +40,20 @@ export class ClienteComponent implements OnInit {
 
   getAll() {
     this.spinner.show();
-    this.clienteService.list().subscribe(dados => {
+    this.clienteService.list(this.nome).subscribe(dados => {
+        this.spinner.hide();
+        this.clientes = dados;
+      },
+      error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+      });
+  }
+
+  filter() {
+    this.spinner.show();
+    console.log('entrou', this.nome);
+    this.clienteService.search({nome: this.nome, cpf: this.cpf}).subscribe(dados => {
         this.spinner.hide();
         this.clientes = dados;
       },
@@ -97,6 +112,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.create(this.cliente).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Cliente cadastrado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       },
@@ -111,6 +127,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.update(this.cliente).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Cliente atualizado com sucesso.'});
+        form.reset();
         this.getAll();
         this.modalRef.hide();
       }
