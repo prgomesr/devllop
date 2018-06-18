@@ -1,8 +1,44 @@
 <app-header-lv1 heading="Fornecedores"></app-header-lv1>
 
+<div>
+  <form #fFiltro="ngForm" (ngSubmit)="getAll()" autocomplete="off">
+
+    <div class="ui-g-6 ui-fluid">
+            <span class="ui-float-label">
+              <input id="filtroFantasia" type="text" pInputText name="fantasia"
+                     [(ngModel)]="filtro.fantasia">
+              <label for="filtroFantasia">Fantasia</label>
+            </span>
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+        <span class="ui-float-label">
+              <input id="filtroRazaoSocial" type="text" pInputText name="razaoSocial"
+                     [(ngModel)]="filtro.razaoSocial">
+              <label for="filtroRazaoSocial">Razão Social</label>
+            </span>
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+        <span class="ui-float-label">
+              <input id="filtroCnpj" type="text" pInputText name="cnpj" mask="99.999.999/9999-99"
+                     [(ngModel)]="filtro.cnpj">
+              <label for="filtroCnpj">CNPJ</label>
+            </span>
+    </div>
+
+    <div class="ui-g-12">
+      <button type="submit" pButton label="Pesquisar"></button>
+      <button type="button" pButton label="Limpar" class="ui-button-secondary"
+              (click)="fFiltro.reset()"></button>
+    </div>
+  </form>
+</div>
+
 <div class="ui-g-12">
   <a href="javascript:void (0)" (click)="openFormModal(modal)"><i class="fa fa-plus"></i> Novo</a>
-  <p-table [value]="fornecedores" [paginator]="true" [rows]="10" [responsive]="true">
+  <p-table [value]="fornecedores" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true"
+           [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th class="text-table-left">Razão</th>

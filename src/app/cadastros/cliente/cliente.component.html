@@ -70,14 +70,13 @@
                 'badge-warning': c.situacao === 'INADIMPLENTE'}">{{c.situacao}}</span>
         </td>
         <td>
-          <a href="javascript:void(0)" pTooltip="Ativar" tooltipPosition="top"><i class="fa fa-check"
-            *ngIf="c.situacao === 'CANCELADO'"></i></a>
           <a href="javascript:void(0)" pTooltip="Editar" tooltipPosition="top"
              (click)="openFormModal(formModal, c.id)"><i class="fa fa-pencil"></i></a>
-          <a href="javascript:void(0)" pTooltip="Detalhes" tooltipPosition="top"><i class="fa fa-eye"></i></a>
+          <a href="javascript:void(0)" pTooltip="Ativar" tooltipPosition="top"><i class="fa fa-check"
+            *ngIf="c.ativo === false" (click)="updateStatus(c.id, true)"></i></a>
           <a href="javascript:void(0)" pTooltip="Inativar" tooltipPosition="top"><i class="fa fa-ban"
-            *ngIf="c.situacao === 'EM DIA' || c.situacao === 'INADIMPLENTE'"
-              (click)="prepararCancelamento(c.id)"></i></a>
+            *ngIf="c.ativo === true"
+              (click)="updateStatus(c.id, false)"></i></a>
         </td>
       </tr>
     </ng-template>

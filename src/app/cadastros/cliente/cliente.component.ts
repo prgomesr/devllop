@@ -64,19 +64,6 @@ export class ClienteComponent implements OnInit {
     this.getAll(pagina);
   }
 
-  /* filter(form) {
-    this.spinner.show();
-    this.clienteService.search(this.filtro)
-      .subscribe(dados => {
-        this.spinner.hide();
-        this.clientes = dados;
-      },
-      error1 => {
-        this.spinner.hide();
-        this.errorHandler.handle(error1);
-      });
-  } */
-
   getEstadosCivis() {
     this.spinner.show();
     this.estadoCivilService.getAll().subscribe(dados => {
@@ -149,6 +136,21 @@ export class ClienteComponent implements OnInit {
         this.spinner.hide();
         this.errorHandler.handle(error1);
       });
+  }
+
+  updateStatus(id: number, status: boolean) {
+    if (id) {
+      this.spinner.show();
+      this.clienteService.updateStatus(id, status).subscribe(() => {
+        this.spinner.hide();
+        this.getAll();
+        this.toasty.success({title: 'Parabéns!', msg: 'Cliente atualizado com sucesso.'});
+      },
+        error1 => {
+        this.spinner.hide();
+        this.errorHandler.handle(error1);
+        });
+    }
   }
 
   delete(id: number) {

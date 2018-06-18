@@ -4,7 +4,8 @@
   <a href="javascript:void (0)" (click)="openSelectModal(selectModal)">
     <i class="fa fa-plus"></i>
     Novo</a>
-  <p-table [value]="lancamentos" [paginator]="true" [rows]="10" [responsive]="true">
+  <p-table [value]="lancamentos" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true"
+           [lazy]="true" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
     <ng-template pTemplate="header">
       <tr>
         <th>Histórico</th>

@@ -10,6 +10,7 @@ import {Fornecedor} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {InstanciasFiltro} from '../../core/InstanciasFiltro';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-fornecedor',
@@ -24,6 +25,7 @@ export class FornecedorComponent implements OnInit {
   modalRef: BsModalRef;
   id: number;
   filtro = new InstanciasFiltro();
+  totalRegistros = 0;
   constructor(private fornecedorService: FornecedorService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
@@ -31,21 +33,25 @@ export class FornecedorComponent implements OnInit {
               private modalService: BsModalService,
               private spinner: NgxSpinnerService) { }
 
-  ngOnInit() {
-    this.getAll();
-  }
+  ngOnInit() {}
 
 
-  getAll() {
+  getAll(pagina = 0) {
     this.spinner.show();
     return this.fornecedorService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
-        this.fornecedores = dados;
+        this.fornecedores = dados.registros;
+        this.totalRegistros = dados.total;
       },
       err => {
         this.spinner.hide();
         this.errorHandler.handle(err);
       });
+  }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.getAll(pagina);
   }
 
   delete(id: number) {

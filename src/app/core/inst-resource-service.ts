@@ -2,6 +2,8 @@ import {Resource, Serializer} from './model';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {InstanciasFiltro} from './InstanciasFiltro';
+import * as moment from 'moment';
+
 // import 'rxjs/add/operator/map';
 
 export class InstResourceService<T extends Resource> {
@@ -22,6 +24,11 @@ export class InstResourceService<T extends Resource> {
       .put<T>(`${this.url}/${this.endpoint}/${item.id}`,
         this.serializer.toJson(item))
       .map(data => this.serializer.fromJson(data) as T);
+  }
+
+  public updateStatus(id: number, status: boolean): Observable<any> {
+    return this.http
+      .put(`${this.url}/${this.endpoint}/${id}/ativo`, status, this.headers());
   }
 
   read(id: number): Observable<T> {
@@ -49,6 +56,24 @@ export class InstResourceService<T extends Resource> {
     if (filtro.ativo) {
       params = params.set('ativo', filtro.ativo.toString());
     }
+    if (filtro.fantasia) {
+      params = params.set('fantasia', filtro.fantasia);
+    }
+    if (filtro.cnpj) {
+      params = params.set('cnpj', filtro.cnpj);
+    }
+    if (filtro.razaoSocial) {
+      params = params.set('razaoSocial', filtro.razaoSocial);
+    }
+    if (filtro.descricao) {
+      params = params.set('descricao', filtro.descricao);
+    }
+    if (filtro.dataVencimentoInicio) {
+      params = params.set('dataVencimentoDe', moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
+    }
+    if (filtro.dataVencimentoFim) {
+      params = params.set('dataVencimentoAte', moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
+    }
   return this.http
     .get(`${this.url}/${this.endpoint}?resumo`, {params})
     .map((data: any) => {
@@ -59,27 +84,6 @@ export class InstResourceService<T extends Resource> {
       return result;
     });
   }
-
-  /* search(filtro: InstanciasFiltro): Observable<any> {
-    let params = new HttpParams();
-      if (filtro.nome) {
-        params = params.set('nome', filtro.nome);
-      }
-      if (filtro.cpf) {
-        params = params.set('cpf', filtro.cpf);
-      }
-      if (filtro.sexo) {
-        params = params.set('sexo', filtro.sexo);
-      }
-      if (filtro.situacao) {
-        params = params.set('situacao', filtro.situacao);
-      }
-      if (filtro.ativo) {
-        params = params.set('ativo', filtro.ativo.toString());
-      }
-    return this.http.get(`${this.url}/${this.endpoint}?resumo`,  {params})
-      .map((data: any) => data.content);
-  } */
 
   delete(id: number) {
     return this.http

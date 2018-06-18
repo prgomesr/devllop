@@ -12,6 +12,7 @@ import {LancamentoService} from './lancamento.service';
 import {FormControl} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {InstanciasFiltro} from '../../core/InstanciasFiltro';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-lancamento',
@@ -33,6 +34,7 @@ export class LancamentoComponent implements OnInit {
   lancamento = new Lancamento();
   options = [];
   filtro = new InstanciasFiltro();
+  totalRegistros = 0;
   constructor(private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
@@ -49,20 +51,24 @@ export class LancamentoComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    this.getAll();
-  }
+  ngOnInit() {}
 
-  getAll() {
+  getAll(pagina = 0) {
     this.spinner.show();
     this.lancamentoService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
-        this.lancamentos = dados;
+        this.lancamentos = dados.registros;
+        this.totalRegistros = dados.total;
       },
       error1 => {
         this.spinner.hide();
         this.errorHandler.handle(error1);
       });
+  }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.getAll(pagina);
   }
 
   getAllContas() {
