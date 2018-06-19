@@ -1,30 +1,28 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Categoria} from '../../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {ErrorHandlerService} from '../../../core/error-handler-service';
-import {ToastyService} from 'ng2-toasty';
-import {CategoriaService} from './categoria-service';
-import {FormControl} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ToastyService} from 'ng2-toasty';
+import {ErrorHandlerService} from '../../../core/error-handler-service';
+import {CategoriaRecebimentoService} from './categoria-recebimento.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-categoria',
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.css']
+  selector: 'app-categoria-recebimento',
+  templateUrl: './categoria-recebimento.component.html',
+  styleUrls: ['./categoria-recebimento.component.css']
 })
-export class CategoriaComponent implements OnInit {
+export class CategoriaRecebimentoComponent implements OnInit {
 
-  categorias = [
-    {id: 1, descricao: 'Material de escritório'}
-  ];
-  id: number;
-  modalRef: BsModalRef;
+  categorias = [];
   categoria = new Categoria();
-  constructor(private categoriaService: CategoriaService,
-              private modalService: BsModalService,
+  modalRef: BsModalRef;
+  id: number;
+  constructor(private modalService: BsModalService,
               private errorHandler: ErrorHandlerService,
               private toasty: ToastyService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private categoriaService: CategoriaRecebimentoService) { }
 
   ngOnInit() {
     this.getAll();
@@ -33,8 +31,8 @@ export class CategoriaComponent implements OnInit {
   getAll() {
     this.spinner.show();
     this.categoriaService.list().subscribe(dados => {
-      this.spinner.hide();
-      this.categorias = dados;
+        this.spinner.hide();
+        this.categorias = dados;
       },
       error1 => {
         this.spinner.hide();

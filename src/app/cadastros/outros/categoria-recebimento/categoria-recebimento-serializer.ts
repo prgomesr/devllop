@@ -1,6 +1,6 @@
 import {Categoria} from '../../../core/model';
 
-export class CategoriaSerializer {
+export class CategoriaRecebimentoSerializer {
   fromJson(json: any): Categoria {
     const categoria = new Categoria();
     categoria.id = json.id;

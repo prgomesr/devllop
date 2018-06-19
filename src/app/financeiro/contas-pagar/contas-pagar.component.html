@@ -1,0 +1,43 @@
+<app-header-lv1 heading="Lançamentos a Pagar"></app-header-lv1>
+
+<div class="ui-g-12">
+  <a href="javascript:void (0)" (click)="openSelectModal(selectModal)">
+    <i class="fa fa-plus"></i>
+    Novo</a>
+  <p-table [value]="lancamentos" [paginator]="true" [rows]="10" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Fornecedor</th>
+        <th>Descrição</th>
+        <th style="width: 100px">Valor</th>
+        <th style="width: 120px">Vencimento</th>
+        <th style="width: 120px">Pagamento</th>
+        <th style="width: 130px">Situação</th>
+        <th style="width: 80px"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-d>
+      <tr>
+        <td>{{d.fornecedor}}</td>
+        <td>{{d.descricao}}</td>
+        <td [style.color]="'red'">{{d.valor | number:'1.2-2'}}</td>
+        <td>{{d.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+        <td>{{d.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+        <td>{{d.situacao}}</td>
+        <td>
+          <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
+             (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
+          <a href="javascript:void (0)" pTooltip="Excluir" tooltipPosition="top"
+             (click)="openConfirmModal(confirmModal, d.id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="text-table-left">
+          Nenhum lançamento encontrado!
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

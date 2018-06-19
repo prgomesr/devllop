@@ -117,6 +117,28 @@ export class Lancamento extends Resource {
   cliente = new Cliente();
 }
 
+export class ParcelaReceber extends Resource {
+  dataEmissao: Date;
+  dataVencimento: Date;
+  valor: number;
+  situacao: string;
+  descricao: string;
+  numDocumento: string;
+  nossoNumero: string;
+  conta = new Conta();
+  cliente = new Cliente();
+  categoriaRecebimento = new Categoria();
+}
+
+export class ParcelaRecebimento extends Resource {
+  dataRecebimento: Date;
+  valorRecebido: number;
+  situacao: string;
+  parcelaReceber = new ParcelaReceber();
+  conta = new Conta();
+  tipoLancamento = new TipoLancamento();
+}
+
 export class Endereco extends Resource {
   logradouro: string;
   numero: number;
