@@ -12,7 +12,9 @@ export class ClienteSerializer {
     cliente.telefonePrincipal = json.telefonePrincipal;
     cliente.telefoneSecundario = json.telefoneSecundario;
     cliente.sexo = json.sexo;
-    cliente.nascimento = moment(json.nascimento, 'YYYY-MM-DD').toDate();
+    if (cliente.nascimento) {
+      cliente.nascimento = moment(json.nascimento, 'YYYY-MM-DD').toDate();
+    }
     cliente.rg = json.rg;
     cliente.observacao = json.observacao;
     cliente.ativo = json.ativo;
