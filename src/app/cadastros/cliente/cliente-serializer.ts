@@ -1,5 +1,6 @@
 import {Cliente} from '../../core/model';
 import * as moment from 'moment';
+import {invalid} from 'moment';
 
 export class ClienteSerializer {
   fromJson(json: any): Cliente {
@@ -12,7 +13,7 @@ export class ClienteSerializer {
     cliente.telefonePrincipal = json.telefonePrincipal;
     cliente.telefoneSecundario = json.telefoneSecundario;
     cliente.sexo = json.sexo;
-    if (cliente.nascimento) {
+    if (json.nascimento) {
       cliente.nascimento = moment(json.nascimento, 'YYYY-MM-DD').toDate();
     }
     cliente.rg = json.rg;

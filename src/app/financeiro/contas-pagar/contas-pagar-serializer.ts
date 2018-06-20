@@ -1,9 +1,9 @@
-import {ParcelaReceber} from '../../core/model';
+import {ParcelaPagar} from '../../core/model';
 import * as moment from 'moment';
 
-export class ContasReceberSerializer {
-  fromJson(json: any): ParcelaReceber {
-    const lancamentos = new ParcelaReceber();
+export class ContasPagarSerializer {
+  fromJson(json: any): ParcelaPagar {
+    const lancamentos = new ParcelaPagar();
     lancamentos.id = json.id;
     if (json.dataEmissao) {
       lancamentos.dataEmissao = moment(json.dataEmissao, 'YYYY-MM-DD').toDate();
@@ -15,15 +15,15 @@ export class ContasReceberSerializer {
     lancamentos.situacao = json.situacao;
     lancamentos.descricao = json.descricao;
     lancamentos.numDocumento = json.numDocumento;
-    lancamentos.nossoNumero = json.nossoNumero;
+    lancamentos.numNf = json.numNf;
     lancamentos.conta = json.conta;
-    lancamentos.cliente = json.cliente;
+    lancamentos.fornecedor = json.fornecedor;
     lancamentos.categoria = json.categoria;
 
     return lancamentos;
   }
 
-  toJson(lancamentos: ParcelaReceber): any {
+  toJson(lancamentos: ParcelaPagar): any {
     return {
       id: lancamentos.id,
       dataEmissao: lancamentos.dataEmissao,
@@ -32,9 +32,9 @@ export class ContasReceberSerializer {
       situacao: lancamentos.situacao,
       descricao: lancamentos.descricao,
       numDocumento: lancamentos.numDocumento,
-      nossoNumero: lancamentos.nossoNumero,
+      numNf: lancamentos.numNf,
       conta: lancamentos.conta,
-      cliente: lancamentos.cliente,
+      fornecedor: lancamentos.fornecedor,
       categoria: lancamentos.categoria
     };
   }

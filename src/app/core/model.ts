@@ -118,16 +118,29 @@ export class Lancamento extends Resource {
 }
 
 export class ParcelaReceber extends Resource {
-  dataEmissao: Date;
+  dataEmissao = new Date();
   dataVencimento: Date;
   valor: number;
-  situacao: string;
+  situacao = 'EM ABERTO';
   descricao: string;
   numDocumento: string;
   nossoNumero: string;
   conta = new Conta();
   cliente = new Cliente();
-  categoriaRecebimento = new Categoria();
+  categoria = new Categoria();
+}
+
+export class ParcelaPagar extends Resource {
+  dataEmissao = new Date();
+  dataVencimento: Date;
+  valor: number;
+  situacao = 'EM ABERTO';
+  descricao: string;
+  numDocumento: string;
+  numNf: string;
+  conta = new Conta();
+  fornecedor = new Fornecedor();
+  categoria = new Categoria();
 }
 
 export class ParcelaRecebimento extends Resource {

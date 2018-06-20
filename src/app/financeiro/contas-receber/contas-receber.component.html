@@ -1,7 +1,7 @@
 <app-header-lv1 heading="Lançamentos a Receber"></app-header-lv1>
 
 <div class="ui-g-12">
-  <a href="javascript:void (0)" (click)="openSelectModal(selectModal)">
+  <a href="javascript:void (0)" (click)="openFormModal(formModal)">
     <i class="fa fa-plus"></i>
     Novo</a>
   <p-table [value]="lancamentos" [paginator]="true" [rows]="10" [responsive]="true"
@@ -11,8 +11,8 @@
         <th>Cliente</th>
         <th>Descrição</th>
         <th style="width: 100px">Valor</th>
+        <th style="width: 120px">Emissão</th>
         <th style="width: 120px">Vencimento</th>
-        <th style="width: 120px">Pagamento</th>
         <th style="width: 130px">Situação</th>
         <th style="width: 80px"></th>
       </tr>
@@ -22,8 +22,8 @@
         <td>{{d.cliente}}</td>
         <td>{{d.descricao}}</td>
         <td [style.color]="'blue'">{{d.valor | number:'1.2-2'}}</td>
+        <td>{{d.dataEmissao| date: 'dd/MM/yyyy'}}</td>
         <td>{{d.dataVencimento | date: 'dd/MM/yyyy'}}</td>
-        <td>{{d.dataPagamento | date: 'dd/MM/yyyy'}}</td>
         <td>{{d.situacao}}</td>
         <td>
           <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
@@ -42,3 +42,91 @@
     </ng-template>
   </p-table>
 </div>
+
+<ng-template #formModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Lançamento a Receber</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
+
+      <!--<div class="ui-g-12 ui-fluid">
+        <p-checkbox name="conta_fixa" binary="true" label="É um lançamento fixo?"
+                    [(ngModel)]="lancamento.contaFixa" required></p-checkbox>
+      </div>-->
+
+      <div class="ui-g-6 ui-fluid">
+        <label>Conta*</label>
+        <p-dropdown [options]="contas" name="conta" [autoWidth]="false" placeholder="Selecione:"
+                    [(ngModel)]="lancamento.conta.id" required></p-dropdown>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <label>Categoria*</label>
+        <p-dropdown [options]="categorias" name="categoria" [autoWidth]="false" placeholder="Selecione:"
+                    [(ngModel)]="lancamento.categoria.id" required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Cliente*</label>
+        <p-dropdown [options]="clientes" name="cliente" [autoWidth]="false" [filter]="true" placeholder="Selecione:"
+                    [(ngModel)]="lancamento.cliente.id" required
+                    emptyFilterMessage="Nenhum cliente encontrado!"></p-dropdown>
+      </div>
+
+      <div class="ui-g-8 ui-fluid">
+        <span class="ui-float-label">
+          <input id="descricao" type="text" pInputText name="descricao"
+                 [(ngModel)]="lancamento.descricao" required>
+          <label for="descricao">Descrição*</label>
+        </span>
+      </div>
+      <div class="ui-g-4 ui-fluid">
+        <span class="ui-float-label">
+          <input id="valor" type="text" pInputText name="valor"
+                 [(ngModel)]="lancamento.valor" required
+                 currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }">
+          <label for="valor">Valor*</label>
+        </span>
+      </div>
+
+      <div class="ui-g-6 ui-fluid">
+        <span class="ui-float-label">
+          <p-calendar name="vencimento" dateFormat="dd/mm/yy" id="vencimento"
+                      [(ngModel)]="lancamento.dataVencimento" required></p-calendar>
+          <label for="vencimento">Vencimento*</label>
+        </span>
+      </div>
+      <div class="ui-g-6 ui-fluid">
+        <span class="ui-float-label">
+          <input id="documento" type="text" pInputText name="documento"
+                 [(ngModel)]="lancamento.numDocumento">
+          <label for="documento">Número do documento</label>
+        </span>
+      </div>
+
+      <!--<div class="ui-g-12 ui-fluid">
+        <span class="ui-float-label">
+          <textarea id="observacao" rows="3" pInputTextarea name="obs"
+                    [(ngModel)]="lancamento.observacao"></textarea>
+          <label for="observacao">Observação</label>
+        </span>
+      </div>-->
+
+      <div class="ui-g-12">
+        <button type="submit" pButton label="Salvar" class="btn-primary"></button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #confirmModal>
+  <div class="modal-body text-center">
+    <p>Deseja realmente excluir este registro?</p>
+    <button type="button" class="btn btn-danger" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>

@@ -87,9 +87,9 @@ export class ContasReceberComponent implements OnInit {
 
   getAllClientes() {
     this.spinner.show();
-    this.clienteService.list(null).subscribe(dados => {
+    this.clienteService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
-        this.clientes = dados
+        this.clientes = dados.registros
           .map(d => ({value: d.id, label: d.nome}));
       },
       error1 => {
