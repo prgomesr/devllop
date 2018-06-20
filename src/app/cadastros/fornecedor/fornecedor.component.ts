@@ -38,6 +38,7 @@ export class FornecedorComponent implements OnInit {
 
   getAll(pagina = 0) {
     this.spinner.show();
+    this.filtro.pagina = pagina;
     return this.fornecedorService.list(this.filtro).subscribe(dados => {
         this.spinner.hide();
         this.fornecedores = dados.registros;
@@ -112,6 +113,21 @@ export class FornecedorComponent implements OnInit {
       });
   }
 
+  updateStatus(id: number, status: boolean) {
+    if (id) {
+      this.spinner.show();
+      this.fornecedorService.updateStatus(id, status).subscribe(() => {
+          this.spinner.hide();
+          this.getAll();
+          this.toasty.success({title: 'Parabéns!', msg: 'Fornecedor atualizado com sucesso.'});
+        },
+        error1 => {
+          this.spinner.hide();
+          this.errorHandler.handle(error1);
+        });
+    }
+  }
+
   openNext() {
     this.index = (this.index === 2) ? 0 : this.index + 1;
   }
@@ -168,6 +184,10 @@ export class FornecedorComponent implements OnInit {
     } else {
       this.fornecedor = new Fornecedor();
     }
+  }
+
+  openSearchModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
   }
 
   openConfirmModal(template: TemplateRef<any>, id: number) {

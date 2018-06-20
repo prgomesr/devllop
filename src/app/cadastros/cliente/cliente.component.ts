@@ -100,6 +100,10 @@ export class ClienteComponent implements OnInit {
     }
   }
 
+  openSearchModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
+  }
+
   onSubmit(form) {
     if (this.editando) {
       this.updateModel(form);

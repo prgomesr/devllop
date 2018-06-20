@@ -48,6 +48,7 @@ export class Fornecedor extends Resource {
   contato: string;
   email: string;
   observacao: string;
+  ativo = true;
   endereco = new Endereco();
 }
 
@@ -152,9 +153,9 @@ export class ParcelaRecebimento extends Resource {
   tipoLancamento = new TipoLancamento();
 }
 
-export class Endereco extends Resource {
+export class Endereco {
   logradouro: string;
-  numero: number;
+  numero: string;
   complemento: string;
   bairro: string;
   cidade: string;
@@ -165,7 +166,6 @@ export class Endereco extends Resource {
 export class EnderecoSerializer {
   fromJson(json: any): Endereco {
     const endereco = new Endereco();
-    endereco.id = json.id;
     endereco.logradouro = json.logradouro;
     endereco.complemento = json.complemento;
     endereco.bairro = json.bairro;
@@ -178,7 +178,6 @@ export class EnderecoSerializer {
 
   toJson(endereco: Endereco): any {
     return {
-      id: endereco.id,
       logradouro: endereco.logradouro,
       complemento: endereco.complemento,
       bairro: endereco.bairro,
