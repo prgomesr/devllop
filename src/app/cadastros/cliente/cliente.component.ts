@@ -1,8 +1,8 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {ClienteService} from './cliente.service';
 import {Cliente} from '../../core/model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {FormControl} from '@angular/forms';
 import {ToastyService} from 'ng2-toasty';
 import {ErrorHandlerService} from '../../core/error-handler-service';
 import {EstadoCivilService} from './estado-civil.service';
@@ -36,6 +36,7 @@ export class ClienteComponent implements OnInit {
   id: number;
   totalRegistros = 0;
   filtro = new InstanciasFiltro();
+  formulario: FormControl;
   constructor(private clienteService: ClienteService,
               private estadoCivilService: EstadoCivilService,
               private modalService: BsModalService,
@@ -89,14 +90,19 @@ export class ClienteComponent implements OnInit {
       });
   }
 
-  openFormModal(template: TemplateRef<any>, id: number) {
+  openFormModal(template: TemplateRef<any>, id: number, f: FormControl) {
     this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
     this.index = 0;
     this.getEstadosCivis();
+    this.formulario = f;
     if (id) {
       this.getById(id);
     } else {
       this.cliente = new Cliente();
+      if (this.formulario) {
+        console.log('tem formulario');
+        this.formulario.reset();
+      }
     }
   }
 

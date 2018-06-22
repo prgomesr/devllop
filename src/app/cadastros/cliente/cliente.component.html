@@ -28,7 +28,7 @@
         </td>
         <td>
           <a href="javascript:void(0)" pTooltip="Editar" tooltipPosition="top"
-             (click)="openFormModal(formModal, c.id)"><i class="fa fa-pencil"></i></a>
+             (click)="openFormModal(formModal, c.id, f)"><i class="fa fa-pencil"></i></a>
           <a href="javascript:void(0)" pTooltip="Ativar" tooltipPosition="top"><i class="fa fa-check"
             *ngIf="c.ativo === false" (click)="updateStatus(c.id, true)"></i></a>
           <a href="javascript:void(0)" pTooltip="Inativar" tooltipPosition="top"><i class="fa fa-ban"
