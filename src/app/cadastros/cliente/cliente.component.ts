@@ -36,7 +36,6 @@ export class ClienteComponent implements OnInit {
   id: number;
   totalRegistros = 0;
   filtro = new InstanciasFiltro();
-  formulario: FormControl;
   constructor(private clienteService: ClienteService,
               private estadoCivilService: EstadoCivilService,
               private modalService: BsModalService,
@@ -90,19 +89,14 @@ export class ClienteComponent implements OnInit {
       });
   }
 
-  openFormModal(template: TemplateRef<any>, id: number, f: FormControl) {
+  openFormModal(template: TemplateRef<any>, id: number) {
     this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
     this.index = 0;
     this.getEstadosCivis();
-    this.formulario = f;
     if (id) {
       this.getById(id);
     } else {
       this.cliente = new Cliente();
-      if (this.formulario) {
-        console.log('tem formulario');
-        this.formulario.reset();
-      }
     }
   }
 
@@ -110,7 +104,7 @@ export class ClienteComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-devllop'});
   }
 
-  onSubmit(form) {
+  onSubmit(form: FormControl) {
     if (this.editando) {
       this.updateModel(form);
     } else {
@@ -123,9 +117,10 @@ export class ClienteComponent implements OnInit {
     this.clienteService.create(this.cliente).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Cliente cadastrado com sucesso.'});
-        form.reset();
+        form.reset({cpf: '',
+          tel_secundario: '', endereco: {cep: ''}});
         this.getAll();
-        this.modalRef.hide();
+        // this.modalRef.hide();
       },
       err => {
         this.spinner.hide();
