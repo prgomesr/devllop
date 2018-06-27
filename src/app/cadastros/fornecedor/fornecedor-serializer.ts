@@ -4,6 +4,7 @@ export class FornecedorSerializer {
   fromJson(json: any): Fornecedor {
     const fornecedor = new Fornecedor();
     fornecedor.id = json.id;
+    fornecedor.ativo = json.ativo,
     fornecedor.cnpj = json.cnpj;
     fornecedor.fantasia = json.fantasia;
     fornecedor.razaoSocial = json.razaoSocial;
@@ -23,6 +24,7 @@ export class FornecedorSerializer {
   toJson(fornecedor: Fornecedor): any {
     return {
       id: fornecedor.id,
+      ativo: fornecedor.ativo,
       cnpj: fornecedor.cnpj,
       fantasia: fornecedor.fantasia,
       razaoSocial: fornecedor.razaoSocial,
