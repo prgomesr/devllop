@@ -22,7 +22,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import {Ng2BRPipesModule} from 'ng2-brpipes';
-import { NgxBrModule } from '@nbfontana/ngx-br';
 
 import {HeaderLv1Component} from './header-lv1/header-lv1.component';
 import {HeaderLv2Component} from './header-lv2/header-lv2.component';
@@ -33,11 +32,10 @@ import {HeaderLv2Component} from './header-lv2/header-lv2.component';
     RouterModule,
     NgxMaskModule.forRoot(),
     ModalModule.forRoot(),
-    NgxBrModule.forRoot()
   ],
   declarations: [HeaderLv1Component, HeaderLv2Component],
   exports: [TableModule, TooltipModule, HeaderLv1Component, HeaderLv2Component, ButtonModule, FormsModule, CommonModule, InputMaskModule,
   InputTextModule, CalendarModule, DropdownModule, RadioButtonModule, AccordionModule, CheckboxModule, InputTextareaModule, DialogModule,
-    NgxMaskModule, ModalModule, Ng2BRPipesModule, CurrencyMaskModule, SelectButtonModule, NgxBrModule]
+    NgxMaskModule, ModalModule, Ng2BRPipesModule, CurrencyMaskModule, SelectButtonModule]
 })
 export class SharedModule { }
