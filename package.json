@@ -34,6 +34,7 @@
     "ng2-toasty": "^4.0.3",
     "ngx-bootstrap": "^2.0.5",
     "ngx-mask": "^2.9.6",
+    "ngx-phone-mask-br": "^1.0.3",
     "ngx-spinner": "^6.0.0",
     "primeicons": "^1.0.0-beta.9",
     "primeng": "^6.0.0",

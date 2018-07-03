@@ -135,7 +135,7 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_principal" type="text" pInputText name="tel_principal"
-                     [(ngModel)]="cliente.telefonePrincipal" required>
+                     [(ngModel)]="cliente.telefonePrincipal" ngxPhoneMaskBr required>
               <label for="telefone_principal">Telefone principal*</label>
             </span>
             </div>
@@ -143,11 +143,10 @@
             <div class="ui-g-6 ui-fluid">
             <span class="ui-float-label">
               <input id="telefone_secundario" type="text" pInputText name="tel_secundario"
-                     [(ngModel)]="cliente.telefoneSecundario">
+                     [(ngModel)]="cliente.telefoneSecundario" ngxPhoneMaskBr>
               <label for="telefone_secundario">Telefone secundário</label>
             </span>
             </div>
-            <pre>{{f.value | json}}</pre>
             <div class="ui-g-12 ui-fluid">
             <span class="ui-float-label">
               <input id="email" type="email" pInputText name="email"

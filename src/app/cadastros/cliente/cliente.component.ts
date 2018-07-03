@@ -117,7 +117,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.create(this.cliente).subscribe(() => {
         this.spinner.hide();
         this.toasty.success({title: 'Parabéns!', msg: 'Cliente cadastrado com sucesso.'});
-        form.reset({cpf: '',
+        form.reset({cpf: '', tel_principal: '',
           tel_secundario: '', endereco: {cep: ''}});
         this.getAll();
         // this.modalRef.hide();
