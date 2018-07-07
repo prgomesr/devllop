@@ -19,12 +19,16 @@
     </ng-template>
     <ng-template pTemplate="body" let-d>
       <tr>
-        <td>{{d.fornecedor}}</td>
-        <td>{{d.descricao}}</td>
+        <td class="text-table-left">{{d.fornecedor}}</td>
+        <td class="text-table-left">{{d.descricao}}</td>
         <td [style.color]="'red'">{{d.valor | number:'1.2-2'}}</td>
         <td>{{d.dataEmissao| date: 'dd/MM/yyyy'}}</td>
         <td>{{d.dataVencimento | date: 'dd/MM/yyyy'}}</td>
-        <td>{{d.situacao}}</td>
+        <td>
+          <span class="badge status-span"
+                [ngClass]="{'badge-success': d.situacao === 'PAGO', 'badge-danger': d.situacao === 'VENCIDO',
+                'badge-warning': d.situacao === 'EM ABERTO'}">{{d.situacao}}</span>
+        </td>
         <td>
           <a href="javascript:void (0)" pTooltip="Editar" tooltipPosition="top"
              (click)="openFormModal(formModal, d.id)"><i class="fa fa-pencil"></i></a>
@@ -45,7 +49,7 @@
 
 <ng-template #formModal>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Lançamento a Receber</h4>
+    <h4 class="modal-title pull-left">Lançamento a Pagar</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
